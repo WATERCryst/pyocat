@@ -1,9 +1,9 @@
 from typing import Literal
 from pydantic import BaseModel
 
-from python_biocat_rest_api_client.models import EventResponse
-from python_biocat_rest_api_client.models import ModeResponse
-from python_biocat_rest_api_client.models import WaterProtectionResponse
+from .event_response import EventResponse
+from .mode_response import ModeResponse
+from .water_protection_response import WaterProtectionResponse
 
 
 class StateResponse(BaseModel):

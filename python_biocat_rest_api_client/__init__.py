@@ -1,5 +1,1 @@
-def main():
-    print("Hello, World!")
-
-if __name__ == "__main__":
-    main()
+from .biocat_rest_api_client import BiocatRestApiClient # type: ignore

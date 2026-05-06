@@ -3,11 +3,11 @@ import httpx
 from types import TracebackType
 from typing import Literal, Mapping, Union
 
-from python_biocat_rest_api_client.api_key_auth import ApiKeyAuth
+from .api_key_auth import ApiKeyAuth
 
-from python_biocat_rest_api_client.models import MeasurementResponse
-from python_biocat_rest_api_client.models import StatisticsResponse
-from python_biocat_rest_api_client.models import StateResponse
+from .models import MeasurementResponse
+from .models import StatisticsResponse
+from .models import StateResponse
 
 
 class BiocatRestApiClient:

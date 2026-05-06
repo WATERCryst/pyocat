@@ -5,6 +5,7 @@
     "Hörtnagl",
     "leakageprotection",
     "mlmeasurement",
+    "pytest",
     "selftest",
     "watersupply"
   ]
