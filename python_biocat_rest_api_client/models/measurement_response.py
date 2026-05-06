@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from .base_response import BaseResponse
 
 
-class MeasurementResponse(BaseModel):
+class MeasurementResponse(BaseResponse):
     """
     Represents current measurement data.
 

@@ -115,7 +115,7 @@ class BiocatRestApiClient:
         The current measurement data.
         """
         response = self.get('measurements/direct')
-        return MeasurementResponse.model_validate_json(response.json())
+        return MeasurementResponse.model_validate(response.json())
 
 
     def start_micro_leakage_measurement(self):
@@ -147,7 +147,7 @@ class BiocatRestApiClient:
         Water consumption statistics of the trailing 30 days.
         """
         response = self.get('statistics/daily/direct')
-        return StatisticsResponse.model_validate_json(response.json())
+        return StatisticsResponse.model_validate(response.json())
 
 
     def get_todays_consumption(self) -> float:
@@ -213,7 +213,7 @@ class BiocatRestApiClient:
         The current device state.
         """
         response = self.get('state', { 'locale': locale, 'format': format })
-        return StateResponse.model_validate_json(response.json())
+        return StateResponse.model_validate(response.json())
 
 
     def get(

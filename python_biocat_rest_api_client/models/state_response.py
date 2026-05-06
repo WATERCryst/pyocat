@@ -1,12 +1,12 @@
 from typing import Literal
-from pydantic import BaseModel
 
+from .base_response import BaseResponse
 from .event_response import EventResponse
 from .mode_response import ModeResponse
 from .water_protection_response import WaterProtectionResponse
 
 
-class StateResponse(BaseModel):
+class StateResponse(BaseResponse):
     """
     Represents the current device state.
 

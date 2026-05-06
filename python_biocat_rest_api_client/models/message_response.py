@@ -1,8 +1,9 @@
 from datetime import datetime
-from pydantic import BaseModel
+
+from .base_response import BaseResponse
 
 
-class MessageResponse(BaseModel):
+class MessageResponse(BaseResponse):
     """
     Represents a message.
 

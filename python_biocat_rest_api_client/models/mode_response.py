@@ -1,8 +1,9 @@
 from typing import Literal
-from pydantic import BaseModel
+
+from .base_response import BaseResponse
 
 
-class ModeResponse(BaseModel):
+class ModeResponse(BaseResponse):
     """
     Represents the current mode of operation.
 

@@ -1,9 +1,10 @@
 from datetime import datetime
 from typing import Literal
-from pydantic import BaseModel
+
+from .base_response import BaseResponse
 
 
-class EventResponse(BaseModel):
+class EventResponse(BaseResponse):
     """
     Represents an event.
 

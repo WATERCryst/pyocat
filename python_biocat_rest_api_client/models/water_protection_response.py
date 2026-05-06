@@ -1,8 +1,9 @@
 from datetime import datetime
-from pydantic import BaseModel
+
+from .base_response import BaseResponse
 
 
-class WaterProtectionResponse(BaseModel):
+class WaterProtectionResponse(BaseResponse):
     """
     Represents the current state of the water protection subsystem.
 

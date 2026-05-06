@@ -1,8 +1,9 @@
 from datetime import datetime
-from pydantic import BaseModel
+
+from .base_response import BaseResponse
 
 
-class StatisticsResponseEntry(BaseModel):
+class StatisticsResponseEntry(BaseResponse):
     """
     A consumption statistics data point.
 
@@ -18,7 +19,7 @@ class StatisticsResponseEntry(BaseModel):
     date: datetime
 
 
-class StatisticsResponse(BaseModel):
+class StatisticsResponse(BaseResponse):
     """
     Represents a list of consumption statistics data points.
 
