@@ -10,7 +10,7 @@ class EventResponse(BaseResponse):
 
     Attributes
     ----------
-    type_ : str 
+    type : str 
         Denotes the type of the response.
     event_id : int 
         Identifies the type of the event.
@@ -24,7 +24,7 @@ class EventResponse(BaseResponse):
         UTC date time of the event.
     """
 
-    type_: str
+    type: str
     event_id: int
     category: Literal['error', 'warning', 'info']
     title: str

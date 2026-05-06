@@ -9,7 +9,7 @@ class MessageResponse(BaseResponse):
 
     Attributes
     ----------
-    type_ : str 
+    type : str 
         Denotes the type of the response.
     absence_mode_enabled : bool 
         Indicates the state of the absence mode.
@@ -18,6 +18,6 @@ class MessageResponse(BaseResponse):
         will be active again.
     """
 
-    type_: str
+    type: str
     absence_mode_enabled: bool
     pause_leakage_protection_until_utc: datetime

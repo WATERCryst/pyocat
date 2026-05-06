@@ -1,7 +1,16 @@
-from python_biocat_rest_api_client import BiocatRestApiClient
+from configparser import RawConfigParser
+
+from pyocat import BiocatRestApiClient
 
 
-key = 'bu97qCvehwJiqDL96x0TTzSnZgqlL2zYw4eVA1D6sbxT3qv2SkRCmDGtoUpM_F1E0rVnkJPzf53GIMZEEwjTuA'
+def load_key():
+    config = RawConfigParser()
+    config.read(r'keys.toml')
+    key = config['keys']['key']
+    return key.strip('"')
+
+
+key = load_key()
 
 
 def test_get_state():

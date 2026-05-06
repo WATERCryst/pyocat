@@ -25,11 +25,11 @@ class StatisticsResponse(BaseResponse):
 
     Attributes
     ----------
-    type_ : str 
+    type : str 
         Denotes the type of the response.
     entries : list[StatisticsResponseEntry] 
         List of data points.    
     """
 
-    type_: str
+    type: str
     entries: list[StatisticsResponseEntry] = []
