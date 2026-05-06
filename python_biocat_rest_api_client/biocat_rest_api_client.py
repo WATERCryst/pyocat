@@ -1,16 +1,18 @@
 import httpx
 
 from types import TracebackType
-from typing import Literal, Mapping
-from api_key_auth import ApiKeyAuth
+from typing import Literal, Mapping, Union
 
-from models import StateResponse
-from models import MeasurementResponse
+from python_biocat_rest_api_client.api_key_auth import ApiKeyAuth
+
+from python_biocat_rest_api_client.models import MeasurementResponse
+from python_biocat_rest_api_client.models import StatisticsResponse
+from python_biocat_rest_api_client.models import StateResponse
 
 
 class BiocatRestApiClient:
     """
-    TODO
+    Synchronous Biocat REST API v1 client.
     """
 
     # NOTE: DON'T add a slash at the end of the base url.
@@ -45,14 +47,14 @@ class BiocatRestApiClient:
         """
         Acknowledges the current device warning or error.
         """
-        pass
+        self.get('ackevent')
 
 
     def enable_absence(self):
         """
         Enables absence mode and raises leakage detector sensitivity.
         """
-        pass
+        self.get('absence/enable')
 
 
     def disable_absence(self):
@@ -60,7 +62,7 @@ class BiocatRestApiClient:
         Disables absence mode and reverts leakage detector 
         sensitivity to its default level.
         """
-        pass
+        self.get('absence/disable')
 
 
     def pause_leakage_protection(
@@ -76,14 +78,14 @@ class BiocatRestApiClient:
             The pause duration in minutes. Must be within the range
             [1 .. 4320].
         """
-        pass
+        self.get('leakageprotection/pause', { 'minutes': minutes })
 
 
     def unpause_leakage_protection(self):
         """
         Reactivates leakage protection.
         """
-        pass
+        self.get('leakageprotection/unpause')
 
 
     def start_self_test(self):
@@ -101,7 +103,7 @@ class BiocatRestApiClient:
         via the webhook endpoint. Additionally it can be queried
         at any time with `GET v1/state`.        
         """
-        pass
+        self.get('selftest')
 
 
     def get_measurements(self) -> MeasurementResponse:
@@ -133,29 +135,44 @@ class BiocatRestApiClient:
         If you use a drip irrigation system in your household, this 
         can be detected as a micro leak.
         """
-        pass
+        self.get('mlmeasurement/start')
 
 
-    def get_daily_statistics(self):
+    def get_daily_statistics(self) -> StatisticsResponse:
         """
         Fetches the daily statistics.
+
+        Returns
+        -------
+        Water consumption statistics of the trailing 30 days.
         """
-        pass
+        response = self.get('statistics/daily/direct')
+        return StatisticsResponse.model_validate_json(response.json())
 
 
     def get_todays_consumption(self) -> float:
         """
         Fetches the total consumption for today.
+
+        Returns
+        -------
+        Todays total water consumption in [L].
         """
-        return 0
+        response = self.get('statistics/cumulative/daily')
+        return float(response.json())
 
 
     def get_total_consumption(self) -> float:
         """
         Fetches the total water consumption since the device was 
         installed.
+
+        Returns
+        -------
+        Total water consumption in [L].
         """
-        return 0
+        response = self.get('statistics/cumulative/total')
+        return float(response.json())
 
 
     def open_water_supply(self):
@@ -163,14 +180,15 @@ class BiocatRestApiClient:
         Connects the device with the water supply.
         Confirms pending warnings and errors.
         """
-        pass
+        self.get('watersupply/open')
 
 
     def close_water_supply(self):
         """
         Disconnects the device from the water supply.
         """
-        pass
+        self.get('watersupply/close')
+
 
     def get_state(
         self,
@@ -201,7 +219,7 @@ class BiocatRestApiClient:
     def get(
         self,
         path: str,
-        params: Mapping[str, str] | None = None,
+        params: Mapping[str, Union[str, int, float, bool]] | None = None,
     ) -> httpx.Response:
         """
         Send a `GET` request.
@@ -210,7 +228,7 @@ class BiocatRestApiClient:
         ----------
         path : str
             The relative path.
-        params : Mapping[str, str]
+        params : Mapping[str, Union[str, int, float, bool]]
             Optional query parameters. 
 
         Returns
