@@ -1,10 +1,13 @@
 {
   "cSpell.words": [
     "ackevent",
+    "asyncio",
     "biocat",
     "Hörtnagl",
+    "httpx",
     "leakageprotection",
     "mlmeasurement",
+    "pydantic",
     "pyocat",
     "pytest",
     "selftest",

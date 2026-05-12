@@ -1,9 +1,9 @@
 from datetime import datetime
+from typing import Annotated
+from pydantic import BaseModel, Field
 
-from .base_response import BaseResponse
 
-
-class WaterProtectionResponse(BaseResponse):
+class WaterProtectionResponse(BaseModel):
     """
     Represents the current state of the water protection subsystem.
 
@@ -15,5 +15,5 @@ class WaterProtectionResponse(BaseResponse):
         UTC date time when the leakage protection will be active again.     
     """
 
-    absence_mode_enabled: bool
-    pause_leakage_protection_until_utc: datetime
+    absence_mode_enabled:               Annotated[bool,     Field(alias='absenceModeEnabled')]
+    pause_leakage_protection_until_utc: Annotated[datetime, Field(alias='pauseLeakageProtectionUntilUTC')]

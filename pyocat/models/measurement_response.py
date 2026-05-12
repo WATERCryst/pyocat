@@ -1,7 +1,8 @@
-from .base_response import BaseResponse
+from typing import Annotated, Union
+from pydantic import BaseModel, Field
 
 
-class MeasurementResponse(BaseResponse):
+class MeasurementResponse(BaseModel):
     """
     Represents current measurement data.
 
@@ -19,8 +20,8 @@ class MeasurementResponse(BaseResponse):
         Duration of the last water tapping in seconds [sec].
     """
 
-    water_temp: int | None
-    pressure: float | None
-    flow_rate: float | None
-    last_water_tap_volume: float | None
-    last_water_tap_duration: float | None
+    water_temp:              Annotated[Union[int,   None], Field(alias='waterTemp')]
+    pressure:                Annotated[Union[float, None], Field(alias='pressure')]
+    flow_rate:               Annotated[Union[float, None], Field(alias='flowRate')]
+    last_water_tap_volume:   Annotated[Union[float, None], Field(alias='lastWaterTapVolume')]
+    last_water_tap_duration: Annotated[Union[float, None], Field(alias='lastWaterTapDuration')]

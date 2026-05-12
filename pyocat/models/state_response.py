@@ -1,12 +1,25 @@
-from typing import Literal
+from typing import Annotated, Literal, Union
+from pydantic import BaseModel, Field
 
-from .base_response import BaseResponse
 from .event_response import EventResponse
 from .mode_response import ModeResponse
 from .water_protection_response import WaterProtectionResponse
 
 
-class StateResponse(BaseResponse):
+MlState = Literal[ 
+    "cancelled",
+    "failure-pressure-drop",
+    "failure-start-pressure",
+    "failure-unknown",
+    "failure-water-tap",
+    "idle",
+    "leakage",
+    "running",
+    "success"
+]
+
+
+class StateResponse(BaseModel):
     """
     Represents the current device state.
 
@@ -24,18 +37,8 @@ class StateResponse(BaseResponse):
         The state of the current (or last) micro leakage measurement.
     """
 
-    online: bool
-    mode: ModeResponse
-    event: EventResponse
-    water_protection: WaterProtectionResponse | None
-    ml_state: Literal[ 
-        "cancelled",
-        "failure-pressure-drop",
-        "failure-start-pressure",
-        "failure-unknown",
-        "failure-water-tap",
-        "idle",
-        "leakage",
-        "running",
-        "success"
-    ] | None
+    online:           Annotated[bool,                                 Field(alias='online')]
+    mode:             Annotated[ModeResponse,                         Field(alias='mode')]
+    event:            Annotated[EventResponse,                        Field(alias='event')]
+    water_protection: Annotated[Union[WaterProtectionResponse, None], Field(alias='waterProtection')]
+    ml_state:         Annotated[Union[MlState, None],                 Field(alias='mlState')]

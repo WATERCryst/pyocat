@@ -15,6 +15,3 @@ Execute to build the library:
 ```bash
 poetry build
 ```
-
-https://developers.home-assistant.io/docs/api_lib_index/
-https://developers.home-assistant.io/docs/core/integration-quality-scale/checklist/

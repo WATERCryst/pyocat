@@ -1,9 +1,9 @@
 from datetime import datetime
+from typing import Annotated
+from pydantic import BaseModel, Field
 
-from .base_response import BaseResponse
 
-
-class MessageResponse(BaseResponse):
+class MessageResponse(BaseModel):
     """
     Represents a message.
 
@@ -18,6 +18,6 @@ class MessageResponse(BaseResponse):
         will be active again.
     """
 
-    type: str
-    absence_mode_enabled: bool
-    pause_leakage_protection_until_utc: datetime
+    type:                               Annotated[str,      Field(alias='type')]
+    absence_mode_enabled:               Annotated[bool,     Field(alias='absenceModeEnabled')]
+    pause_leakage_protection_until_utc: Annotated[datetime, Field(alias='pauseLeakageProtectionUntilUTC')]

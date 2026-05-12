@@ -1,9 +1,9 @@
 from datetime import datetime
+from typing import Annotated
+from pydantic import BaseModel, Field
 
-from .base_response import BaseResponse
 
-
-class StatisticsResponseEntry(BaseResponse):
+class StatisticsResponseEntry(BaseModel):
     """
     A consumption statistics data point.
 
@@ -15,11 +15,11 @@ class StatisticsResponseEntry(BaseResponse):
         UTC date of the measurement. 
     """
 
-    consumption: float
-    date: datetime
+    consumption: Annotated[float,    Field(alias='consumption')]
+    date:        Annotated[datetime, Field(alias='date')]
 
 
-class StatisticsResponse(BaseResponse):
+class StatisticsResponse(BaseModel):
     """
     Represents a list of consumption statistics data points.
 
@@ -31,5 +31,5 @@ class StatisticsResponse(BaseResponse):
         List of data points.    
     """
 
-    type: str
-    entries: list[StatisticsResponseEntry] = []
+    type:    Annotated[str,                           Field(alias='type')]
+    entries: Annotated[list[StatisticsResponseEntry], Field(alias='entries')] = []

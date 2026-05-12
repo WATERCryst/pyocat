@@ -1,10 +1,12 @@
 from datetime import datetime
-from typing import Literal
+from typing import Annotated, Literal
+from pydantic import BaseModel, Field
 
-from .base_response import BaseResponse
+
+EventCategory = Literal['error', 'warning', 'info']
 
 
-class EventResponse(BaseResponse):
+class EventResponse(BaseModel):
     """
     Represents an event.
 
@@ -24,9 +26,9 @@ class EventResponse(BaseResponse):
         UTC date time of the event.
     """
 
-    type: str
-    event_id: int
-    category: Literal['error', 'warning', 'info']
-    title: str
-    description: str
-    timestamp: datetime
+    type:        Annotated[str,           Field(alias='type')]
+    event_id:    Annotated[int,           Field(alias='eventId')]
+    category:    Annotated[EventCategory, Field(alias='category')]
+    title:       Annotated[str,           Field(alias='title')]
+    description: Annotated[str,           Field(alias='description')]
+    timestamp:   Annotated[datetime,      Field(alias='timestamp')]

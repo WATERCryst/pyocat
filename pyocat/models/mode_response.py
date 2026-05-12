@@ -1,9 +1,11 @@
-from typing import Literal
+from typing import Annotated, Literal
+from pydantic import BaseModel, Field
 
-from .base_response import BaseResponse
+
+ModeId = Literal['ER', 'FS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
 
 
-class ModeResponse(BaseResponse):
+class ModeResponse(BaseModel):
     """
     Represents the current mode of operation.
 
@@ -15,5 +17,5 @@ class ModeResponse(BaseResponse):
         Mode display name.
     """
 
-    id: Literal['ER', 'FS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
-    name: str
+    id:   Annotated[ModeId, Field(alias='id')] 
+    name: Annotated[str,    Field(alias='name')]
