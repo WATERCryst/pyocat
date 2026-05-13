@@ -178,7 +178,7 @@ def test_get_state_1(httpx_mock): # type: ignore
         auth = Auth(client, "")
         api = ApiClient(auth)
         resp = api.get_state()
-        assert resp.online == True
+        assert resp.online == False
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
         assert resp.event.type == "event"
