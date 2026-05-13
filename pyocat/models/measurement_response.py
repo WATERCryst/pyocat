@@ -20,8 +20,8 @@ class MeasurementResponse(BaseModel):
         Duration of the last water tapping in seconds [sec].
     """
 
-    water_temp:              Annotated[Union[int,   None], Field(alias='waterTemp')]
-    pressure:                Annotated[Union[float, None], Field(alias='pressure')]
-    flow_rate:               Annotated[Union[float, None], Field(alias='flowRate')]
-    last_water_tap_volume:   Annotated[Union[float, None], Field(alias='lastWaterTapVolume')]
-    last_water_tap_duration: Annotated[Union[float, None], Field(alias='lastWaterTapDuration')]
+    water_temp:              Annotated[Union[int,   None], Field(alias='waterTemp')]            = None
+    pressure:                Annotated[Union[float, None], Field(alias='pressure')]             = None
+    flow_rate:               Annotated[Union[float, None], Field(alias='flowRate')]             = None
+    last_water_tap_volume:   Annotated[Union[float, None], Field(alias='lastWaterTapVolume')]   = None
+    last_water_tap_duration: Annotated[Union[float, None], Field(alias='lastWaterTapDuration')] = None

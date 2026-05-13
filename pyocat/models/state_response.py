@@ -40,5 +40,5 @@ class StateResponse(BaseModel):
     online:           Annotated[bool,                                 Field(alias='online')]
     mode:             Annotated[ModeResponse,                         Field(alias='mode')]
     event:            Annotated[EventResponse,                        Field(alias='event')]
-    water_protection: Annotated[Union[WaterProtectionResponse, None], Field(alias='waterProtection')]
-    ml_state:         Annotated[Union[MlState, None],                 Field(alias='mlState')]
+    water_protection: Annotated[Union[WaterProtectionResponse, None], Field(alias='waterProtection')] = None
+    ml_state:         Annotated[Union[MlState, None],                 Field(alias='mlState')]         = None
