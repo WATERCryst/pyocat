@@ -1,0 +1,37 @@
+name: Test Python Package
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  release-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v4
+
+      - name: Set-up a dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: ./.venv
+          key: venv-${{ hashFiles('poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run unit tests
+        run: poetry run pytest
+
+      - name: Build release distribution
+        run: poetry build
