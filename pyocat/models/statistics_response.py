@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Annotated
 from pydantic import BaseModel, Field
 
 
+@dataclass
 class StatisticsResponseEntry(BaseModel):
     """
     A consumption statistics data point.
@@ -19,6 +21,7 @@ class StatisticsResponseEntry(BaseModel):
     date:        Annotated[datetime, Field(alias='date')]
 
 
+@dataclass
 class StatisticsResponse(BaseModel):
     """
     Represents a list of consumption statistics data points.

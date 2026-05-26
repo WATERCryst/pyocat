@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Annotated, Literal
 from pydantic import BaseModel, Field
 
@@ -5,6 +6,7 @@ from pydantic import BaseModel, Field
 ModeId = Literal['ER', 'FS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
 
 
+@dataclass
 class ModeResponse(BaseModel):
     """
     Represents the current mode of operation.

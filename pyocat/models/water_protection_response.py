@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Annotated
 from pydantic import BaseModel, Field
 
 
+@dataclass
 class WaterProtectionResponse(BaseModel):
     """
     Represents the current state of the water protection subsystem.

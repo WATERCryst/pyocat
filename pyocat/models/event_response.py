@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Annotated, Literal
 from pydantic import BaseModel, Field
@@ -6,6 +7,7 @@ from pydantic import BaseModel, Field
 EventCategory = Literal['error', 'warning', 'info']
 
 
+@dataclass
 class EventResponse(BaseModel):
     """
     Represents an event.

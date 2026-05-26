@@ -1,7 +1,9 @@
+from dataclasses import dataclass
 from typing import Annotated, Union
 from pydantic import BaseModel, Field
 
 
+@dataclass
 class MeasurementResponse(BaseModel):
     """
     Represents current measurement data.
