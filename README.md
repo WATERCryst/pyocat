@@ -1,4 +1,6 @@
-Biocat Python Api Client
+# Biocat Python Api Client
+
+[![Test Python Package](https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml/badge.svg?branch=main)](https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml)
 
 Execute to download dependencies:
 
