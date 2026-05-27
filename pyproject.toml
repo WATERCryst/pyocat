@@ -1,6 +1,6 @@
 [project]
 name = "pyocat"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = [
     { name = "Mathias Hörtnagl", email = "mathias.hoertnagl@watercryst.com" },
