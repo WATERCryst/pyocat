@@ -1,10 +1,8 @@
-from dataclasses import dataclass
 from datetime import datetime
 from typing import Annotated
 from pydantic import BaseModel, Field
 
 
-@dataclass
 class MessageResponse(BaseModel):
     """
     Represents a message.

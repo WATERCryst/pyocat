@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Annotated, Literal, Union
 from pydantic import BaseModel, Field
 
@@ -20,7 +19,6 @@ MlState = Literal[
 ]
 
 
-@dataclass
 class StateResponse(BaseModel):
     """
     Represents the current device state.

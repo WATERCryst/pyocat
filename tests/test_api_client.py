@@ -178,7 +178,7 @@ def test_get_state_1(httpx_mock): # type: ignore
         auth = Auth(client, "")
         api = ApiClient(auth)
         resp = api.get_state()
-        assert resp.online == True
+        assert resp.online
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
         assert resp.event.type == "event"
@@ -216,7 +216,7 @@ def test_get_state_2(httpx_mock): # type: ignore
         auth = Auth(client, "")
         api = ApiClient(auth)
         resp = api.get_state()
-        assert resp.online == True
+        assert resp.online
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
         assert resp.event.type == "event"
@@ -226,6 +226,6 @@ def test_get_state_2(httpx_mock): # type: ignore
         assert resp.event.description == "Der Mindestvolumenstrom wurde nicht erreicht oder hat die vorgegebene Grenze unterschritten."
         assert resp.event.timestamp == datetime(2026, 5, 12, 14, 54, tzinfo=TzInfo(0))
         if resp.water_protection:
-            assert resp.water_protection.absence_mode_enabled == True
+            assert resp.water_protection.absence_mode_enabled
             assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=TzInfo(0))
         assert resp.ml_state == "running"

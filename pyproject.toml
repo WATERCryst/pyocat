@@ -1,9 +1,9 @@
 [project]
 name = "pyocat"
-version = "0.2.2"
+version = "0.3.0"
 description = ""
 authors = [
-    { name = "Mathias Hörtnagl", email = "mathias.hoertnagl@watercryst.com" },
+    { name = "WATERCryst Developers", email = "appservice@watercryst.com" },
 ]
 readme = "README.md"
 requires-python = ">=3.12"
