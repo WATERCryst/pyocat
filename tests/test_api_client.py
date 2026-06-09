@@ -68,7 +68,7 @@ def test_get_measurements(httpx_mock): # type: ignore
         "pressure": 3.88,
         "flowRate": 4.5,
         "lastWaterTapVolume": 15.3,
-        "lastWaterTapDuration": 30.1,
+        "lastWaterTapDuration": 30,
     }
     httpx_mock.add_response(url=URL, json=JSON) # type: ignore
     with httpx.Client() as client:
@@ -79,7 +79,7 @@ def test_get_measurements(httpx_mock): # type: ignore
         assert resp.pressure == 3.88
         assert resp.flow_rate == 4.5
         assert resp.last_water_tap_volume == 15.3
-        assert resp.last_water_tap_duration == 30.1
+        assert resp.last_water_tap_duration == 30
 
 
 def test_start_micro_leakage_measurement(httpx_mock): # type: ignore
@@ -106,7 +106,6 @@ def test_get_daily_statistics(httpx_mock): # type: ignore
         auth = Auth(client, "")
         api = ApiClient(auth)
         resp = api.get_daily_statistics()
-        assert resp.type == 'statistics'
         assert len(resp.entries) == 3
         assert resp.entries[0].consumption == 500.1
         assert resp.entries[0].date == datetime(2026, 1, 1, tzinfo=TzInfo(0))
@@ -181,7 +180,6 @@ def test_get_state_1(httpx_mock): # type: ignore
         assert resp.online
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
-        assert resp.event.type == "event"
         assert resp.event.event_id == 65
         assert resp.event.category == "error"
         assert resp.event.title == "65 --  Mindestvolumenstrom unterschritten"
@@ -219,7 +217,6 @@ def test_get_state_2(httpx_mock): # type: ignore
         assert resp.online
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
-        assert resp.event.type == "event"
         assert resp.event.event_id == 65
         assert resp.event.category == "error"
         assert resp.event.title == "65 --  Mindestvolumenstrom unterschritten"

@@ -25,11 +25,8 @@ class StatisticsResponse(BaseModel):
 
     Attributes
     ----------
-    type : str 
-        Denotes the type of the response.
     entries : list[StatisticsResponseEntry] 
         List of data points.    
     """
 
-    type:    Annotated[str,                           Field(alias='type')]
     entries: Annotated[list[StatisticsResponseEntry], Field(alias='entries')] = []

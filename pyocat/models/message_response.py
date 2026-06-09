@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Annotated
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class MessageResponse(BaseModel):
@@ -9,8 +9,6 @@ class MessageResponse(BaseModel):
 
     Attributes
     ----------
-    type : str 
-        Denotes the type of the response.
     absence_mode_enabled : bool 
         Indicates the state of the absence mode.
     pause_leakage_protection_until_utc : datetime
@@ -18,6 +16,11 @@ class MessageResponse(BaseModel):
         will be active again.
     """
 
-    type:                               Annotated[str,      Field(alias='type')]
+    model_config = ConfigDict(
+        serialize_by_alias=True, 
+        validate_by_name=True, 
+        validate_by_alias=True
+    )
+
     absence_mode_enabled:               Annotated[bool,     Field(alias='absenceModeEnabled')]
     pause_leakage_protection_until_utc: Annotated[datetime, Field(alias='pauseLeakageProtectionUntilUTC')]
