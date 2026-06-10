@@ -1,5 +1,5 @@
 from typing import Annotated, Literal, Union
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from .event_response import EventResponse
 from .mode_response import ModeResponse
@@ -33,9 +33,15 @@ class StateResponse(BaseModel):
         Represents an event.
     water_protection : WaterProtectionResponse | None
         Represents the current state of the water protection subsystem. 
-    ml_state : Literal["cancelled", "failure-pressure-drop", "failure-start-pressure", "failure-unknown", "failure-water-tap", "idle", "leakage", "running", "success"] | None
+    ml_state : 'cancelled' | 'failure-pressure-drop' | 'failure-start-pressure' | 'failure-unknown' | 'failure-water-tap' | 'idle' | 'leakage' | 'running' | 'success' | None
         The state of the current (or last) micro leakage measurement.
     """
+
+    model_config = ConfigDict(
+        serialize_by_alias=True, 
+        validate_by_name=True, 
+        validate_by_alias=True
+    )
 
     online:           Annotated[bool,                                 Field(alias='online')]
     mode:             Annotated[ModeResponse,                         Field(alias='mode')]

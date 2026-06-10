@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Annotated
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class StatisticsResponseEntry(BaseModel):
@@ -15,6 +15,12 @@ class StatisticsResponseEntry(BaseModel):
         UTC date of the measurement. 
     """
 
+    model_config = ConfigDict(
+        serialize_by_alias=True, 
+        validate_by_name=True, 
+        validate_by_alias=True
+    )
+
     consumption: Annotated[float,    Field(alias='consumption')]
     date:        Annotated[datetime, Field(alias='date')]
 
@@ -28,5 +34,11 @@ class StatisticsResponse(BaseModel):
     entries : list[StatisticsResponseEntry] 
         List of data points.    
     """
+
+    model_config = ConfigDict(
+        serialize_by_alias=True, 
+        validate_by_name=True, 
+        validate_by_alias=True
+    )
 
     entries: Annotated[list[StatisticsResponseEntry], Field(alias='entries')] = []

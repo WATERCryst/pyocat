@@ -36,7 +36,7 @@ class ModeResponse(BaseModel):
 
     Attributes
     ----------
-    id : Literal['ER', 'FS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT'] 
+    id : 'ER' | 'FS' | 'MC' | 'RS' | 'ST' | 'TD' | 'UD' | 'WO' | 'WT'
         Mode identifier.
     name : str 
         Mode display name.
