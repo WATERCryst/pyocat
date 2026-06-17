@@ -241,3 +241,45 @@ async def test_get_state_2(httpx_mock): # type: ignore
             assert resp.water_protection.absence_mode_enabled
             assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=TzInfo(0))
         assert resp.ml_state == "running"
+
+
+@pytest.mark.asyncio
+async def test_get_state_3(httpx_mock): # type: ignore
+    URL = 'https://appapi.watercryst.com/v1/state?locale=de&format=plain'
+    JSON: dict[str, Any] = {
+        "online": True,
+        "mode": {
+            "id": "WT",
+            "name": "Water Treatment"
+        },
+        "event": {
+            "type": "event",
+            "eventId": 0,
+            "category": None,
+            "title": None,
+            "description": None,
+            "timestamp": None
+        },
+        "waterProtection": {
+            "absenceModeEnabled": False,
+            "pauseLeakageProtectionUntilUTC": "2000-01-01T00:00:00.0000000Z"
+        },
+        "mlState": "success"
+    }
+    httpx_mock.add_response(url=URL, json=JSON) # type: ignore
+    async with httpx.AsyncClient() as client:
+        auth = AsyncAuth(client, "")
+        api = AsyncApiClient(auth)
+        resp = await api.get_state()
+        assert resp.online
+        assert resp.mode.id == "WT"
+        assert resp.mode.name == "Water Treatment"
+        assert resp.event.event_id == 0
+        assert resp.event.category is None
+        assert resp.event.title is None
+        assert resp.event.description is None
+        assert resp.event.timestamp is None
+        if resp.water_protection:
+            assert not resp.water_protection.absence_mode_enabled
+            assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=TzInfo(0))
+        assert resp.ml_state == "success"

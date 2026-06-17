@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Union
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -30,8 +30,8 @@ class EventResponse(BaseModel):
         validate_by_alias=True
     )
 
-    event_id:    Annotated[int,           Field(alias="eventId")]
-    category:    Annotated[EventCategory, Field(alias='category')]
-    title:       Annotated[str,           Field(alias='title')]
-    description: Annotated[str,           Field(alias='description')]
-    timestamp:   Annotated[datetime,      Field(alias='timestamp')]
+    event_id:    Annotated[int,                        Field(alias="eventId")]
+    category:    Annotated[Union[EventCategory, None], Field(alias='category')]
+    title:       Annotated[Union[str,           None], Field(alias='title')]
+    description: Annotated[Union[str,           None], Field(alias='description')]
+    timestamp:   Annotated[Union[datetime,      None], Field(alias='timestamp')]
