@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Union
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -9,9 +9,9 @@ class MessageResponse(BaseModel):
 
     Attributes
     ----------
-    absence_mode_enabled : bool 
+    absence_mode_enabled : bool | None
         Indicates the state of the absence mode.
-    pause_leakage_protection_until_utc : datetime
+    pause_leakage_protection_until_utc : datetime | None
         UTC date time string when the leakage protection 
         will be active again.
     """
@@ -22,5 +22,5 @@ class MessageResponse(BaseModel):
         validate_by_alias=True
     )
 
-    absence_mode_enabled:               Annotated[bool,     Field(alias='absenceModeEnabled')]
-    pause_leakage_protection_until_utc: Annotated[datetime, Field(alias='pauseLeakageProtectionUntilUTC')]
+    absence_mode_enabled:               Annotated[Union[bool,     None], Field(alias='absenceModeEnabled')]             = None
+    pause_leakage_protection_until_utc: Annotated[Union[datetime, None], Field(alias='pauseLeakageProtectionUntilUTC')] = None

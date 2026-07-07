@@ -12,15 +12,15 @@ class EventResponse(BaseModel):
 
     Attributes
     ----------
-    event_id : int 
+    event_id : int | None
         Identifies the type of the event.
-    category : Literal['error', 'warning', 'info'] 
+    category : 'error' | 'warning' | 'info' | None
         The event category.
-    title : str 
+    title : str | None
         Event summary.
-    description : str 
+    description : str | None
         Detailed description.
-    timestamp : datetime
+    timestamp : datetime | None
         UTC date time of the event.
     """
 
@@ -30,8 +30,8 @@ class EventResponse(BaseModel):
         validate_by_alias=True
     )
 
-    event_id:    Annotated[int,                        Field(alias="eventId")]
-    category:    Annotated[Union[EventCategory, None], Field(alias='category')]
-    title:       Annotated[Union[str,           None], Field(alias='title')]
-    description: Annotated[Union[str,           None], Field(alias='description')]
-    timestamp:   Annotated[Union[datetime,      None], Field(alias='timestamp')]
+    event_id:    Annotated[Union[int,           None], Field(alias="eventId")]     = None
+    category:    Annotated[Union[EventCategory, None], Field(alias='category')]    = None
+    title:       Annotated[Union[str,           None], Field(alias='title')]       = None
+    description: Annotated[Union[str,           None], Field(alias='description')] = None
+    timestamp:   Annotated[Union[datetime,      None], Field(alias='timestamp')]   = None

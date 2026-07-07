@@ -192,8 +192,10 @@ async def test_get_state_1(httpx_mock): # type: ignore
         api = AsyncApiClient(auth)
         resp = await api.get_state()
         assert resp.online
+        assert resp.mode
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
+        assert resp.event
         assert resp.event.event_id == 65
         assert resp.event.category == "error"
         assert resp.event.title == "65 --  Mindestvolumenstrom unterschritten"
@@ -230,8 +232,10 @@ async def test_get_state_2(httpx_mock): # type: ignore
         api = AsyncApiClient(auth)
         resp = await api.get_state()
         assert resp.online
+        assert resp.mode
         assert resp.mode.id == "ER"
         assert resp.mode.name == "Error"
+        assert resp.event
         assert resp.event.event_id == 65
         assert resp.event.category == "error"
         assert resp.event.title == "65 --  Mindestvolumenstrom unterschritten"
@@ -272,8 +276,10 @@ async def test_get_state_3(httpx_mock): # type: ignore
         api = AsyncApiClient(auth)
         resp = await api.get_state()
         assert resp.online
+        assert resp.mode
         assert resp.mode.id == "WT"
         assert resp.mode.name == "Water Treatment"
+        assert resp.event
         assert resp.event.event_id == 0
         assert resp.event.category is None
         assert resp.event.title is None
@@ -283,3 +289,29 @@ async def test_get_state_3(httpx_mock): # type: ignore
             assert not resp.water_protection.absence_mode_enabled
             assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=TzInfo(0))
         assert resp.ml_state == "success"
+
+
+@pytest.mark.asyncio
+async def test_get_device_info(httpx_mock): # type: ignore
+    URL = 'https://appapi.watercryst.com/v1/device'
+    JSON: dict[str, Any] = {
+        "biocatSerial": "2025001395300149",
+        "electronicsSerial": "2041730218",
+        "line": "BIOCAT",
+        "series": "KLS 3000-C",
+        "name": "Schulungsgerät",
+        "currentFirmwareVersion": "V01.05.07",
+        "latestFirmwareVersion": "V01.08.05"
+    }
+    httpx_mock.add_response(url=URL, json=JSON) # type: ignore
+    async with httpx.AsyncClient() as client:
+        auth = AsyncAuth(client, "")
+        api = AsyncApiClient(auth)
+        resp = await api.get_device_info()
+        assert resp.biocat_serial == "2025001395300149"
+        assert resp.electronics_serial == "2041730218"
+        assert resp.line == "BIOCAT"
+        assert resp.series == "KLS 3000-C"
+        assert resp.name == "Schulungsgerät"
+        assert resp.current_firmware_version == "V01.05.07"
+        assert resp.latest_firmware_version == "V01.08.05"

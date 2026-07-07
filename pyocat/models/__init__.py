@@ -1,8 +1,12 @@
-from .event_response            import EventResponse, EventCategory # type: ignore
-from .measurement_response      import MeasurementResponse          # type: ignore
-from .message_response          import MessageResponse              # type: ignore
-from .mode_response             import ModeResponse, ModeId         # type: ignore
-from .state_response            import StateResponse, MlState       # type: ignore
-from .statistics_response       import StatisticsResponse           # type: ignore
-from .statistics_response       import StatisticsResponseEntry      # type: ignore
-from .water_protection_response import WaterProtectionResponse      # type: ignore
+from .device_response           import DeviceResponse          as DeviceResponse
+from .event_response            import EventResponse           as EventResponse
+from .event_response            import EventCategory           as EventCategory
+from .measurement_response      import MeasurementResponse     as MeasurementResponse
+from .message_response          import MessageResponse         as MessageResponse      
+from .mode_response             import ModeResponse            as ModeResponse  
+from .mode_response             import ModeId                  as ModeId
+from .state_response            import StateResponse           as StateResponse
+from .state_response            import MlState                 as MlState
+from .statistics_response       import StatisticsResponse      as StatisticsResponse
+from .statistics_response       import StatisticsResponseEntry as StatisticsResponseEntry
+from .water_protection_response import WaterProtectionResponse as WaterProtectionResponse

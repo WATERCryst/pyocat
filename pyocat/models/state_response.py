@@ -25,11 +25,11 @@ class StateResponse(BaseModel):
 
     Attributes
     ----------
-    online : bool 
+    online : bool | None
         Indicates whether the device is online or offline right now.
-    mode : ModeResponse
+    mode : ModeResponse | None
         Represents the current mode of operation.
-    event : EventResponse
+    event : EventResponse | None
         Represents an event.
     water_protection : WaterProtectionResponse | None
         Represents the current state of the water protection subsystem. 
@@ -43,8 +43,8 @@ class StateResponse(BaseModel):
         validate_by_alias=True
     )
 
-    online:           Annotated[bool,                                 Field(alias='online')]
-    mode:             Annotated[ModeResponse,                         Field(alias='mode')]
-    event:            Annotated[EventResponse,                        Field(alias='event')]
+    online:           Annotated[Union[bool,                    None], Field(alias='online')]          = None
+    mode:             Annotated[Union[ModeResponse,            None], Field(alias='mode')]            = None
+    event:            Annotated[Union[EventResponse,           None], Field(alias='event')]           = None
     water_protection: Annotated[Union[WaterProtectionResponse, None], Field(alias='waterProtection')] = None
-    ml_state:         Annotated[Union[MlState, None],                 Field(alias='mlState')]         = None
+    ml_state:         Annotated[Union[MlState,                 None], Field(alias='mlState')]         = None

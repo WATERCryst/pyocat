@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Union
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -21,5 +21,5 @@ class WaterProtectionResponse(BaseModel):
         validate_by_alias=True
     )
 
-    absence_mode_enabled:               Annotated[bool,     Field(alias='absenceModeEnabled')]
-    pause_leakage_protection_until_utc: Annotated[datetime, Field(alias='pauseLeakageProtectionUntilUTC')]
+    absence_mode_enabled:               Annotated[Union[bool,     None], Field(alias='absenceModeEnabled')]             = None
+    pause_leakage_protection_until_utc: Annotated[Union[datetime, None], Field(alias='pauseLeakageProtectionUntilUTC')] = None
