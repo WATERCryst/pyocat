@@ -280,11 +280,15 @@ def test_get_device_info(httpx_mock): # type: ignore
     JSON: dict[str, Any] = {
         "biocatSerial": "2025001395300149",
         "electronicsSerial": "2041730218",
+        "deviceTypeNumber": "12000273",
         "line": "BIOCAT",
         "series": "KLS 3000-C",
         "name": "Schulungsgerät",
         "currentFirmwareVersion": "V01.05.07",
-        "latestFirmwareVersion": "V01.08.05"
+        "currentHardwareVersion": "2",
+        "latestFirmwareVersion": "V01.08.05",
+        "systemMacAddress": "00:A2:FF:01:EE:DE",
+        "bleMacAddress": "CC:F9:57:8F:EE:C4"
     }
     httpx_mock.add_response(url=URL, json=JSON) # type: ignore
     with httpx.Client() as client:
@@ -293,8 +297,12 @@ def test_get_device_info(httpx_mock): # type: ignore
         resp = api.get_device_info()
         assert resp.biocat_serial == "2025001395300149"
         assert resp.electronics_serial == "2041730218"
+        assert resp.device_type_number == "12000273"
         assert resp.line == "BIOCAT"
         assert resp.series == "KLS 3000-C"
         assert resp.name == "Schulungsgerät"
         assert resp.current_firmware_version == "V01.05.07"
+        assert resp.current_hardware_version == "2"
         assert resp.latest_firmware_version == "V01.08.05"
+        assert resp.system_mac_address == "00:A2:FF:01:EE:DE"
+        assert resp.ble_mac_address == "CC:F9:57:8F:EE:C4"
