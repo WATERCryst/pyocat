@@ -82,5 +82,5 @@ SOFTWARE.
 [releases-shield]: https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml/badge.svg?branch=main
 [releases]: https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml
 [pypi-shield]: https://img.shields.io/pypi/v/pyocat
-[pypi]: https://badge.fury.io/py/pyocat
+[pypi]: https://pypi.org/project/pyocat
 [license-shield]: https://img.shields.io/pypi/l/pyocat
