@@ -1,4 +1,4 @@
-# BIOCAT Python Clients
+# BIOCAT Python Client Library
 
 [![Test Python Package][releases-shield]][releases]
 [![PyPI version][pypi-shield]][pypi]
