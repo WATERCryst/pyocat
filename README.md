@@ -1,8 +1,8 @@
 # BIOCAT Python Clients
 
 [![Test Python Package][releases-shield]][releases]
-[![PyPI version][pypi-shield]][pypi]
-![PyPI License][license]
+![PyPI Version][pypi-shield]
+![PyPI License][license-shield]
 
 
 ## About
@@ -81,6 +81,5 @@ SOFTWARE.
 
 [releases-shield]: https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml/badge.svg?branch=main
 [releases]: https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml
-[pypi-shield]: https://badge.fury.io/py/pyocat.svg
-[pypi]: https://badge.fury.io/py/pyocat
-[license]: https://img.shields.io/pypi/l/pyocat
+[pypi-shield]: https://img.shields.io/pypi/v/pyocat
+[license-shield]: https://img.shields.io/pypi/l/pyocat
