@@ -2,10 +2,13 @@
 
 [![Test Python Package][releases-shield]][releases]
 [![PyPI version][pypi-shield]][pypi]
+![PyPI License][license]
+
 
 ## About
 
 A Python client library to connect to BIOCAT devices.
+
 
 ## Installation
 
@@ -80,3 +83,4 @@ SOFTWARE.
 [releases]: https://github.com/WATERCryst/pyocat/actions/workflows/push.pipeline.yml
 [pypi-shield]: https://badge.fury.io/py/pyocat.svg
 [pypi]: https://badge.fury.io/py/pyocat
+[license]: https://img.shields.io/pypi/l/pyocat
