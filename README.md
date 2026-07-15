@@ -2,7 +2,7 @@
 
 [![Test Python Package][releases-shield]][releases]
 [![PyPI version][pypi-shield]][pypi]
-![PyPI License][license-shield]
+[![PyPI License][license-shield]][license]
 
 
 ## About
@@ -84,3 +84,4 @@ SOFTWARE.
 [pypi-shield]: https://img.shields.io/pypi/v/pyocat
 [pypi]: https://pypi.org/project/pyocat
 [license-shield]: https://img.shields.io/pypi/l/pyocat
+[license]: https://raw.githubusercontent.com/WATERCryst/pyocat/refs/heads/main/LICENSE
