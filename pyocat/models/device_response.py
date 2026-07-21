@@ -18,6 +18,8 @@ class DeviceResponse(BaseModel):
         Product line.
     series : str | None 
         Product series.
+    has_leakage_protection_system: bool
+        Whether this device supports leakage protection.
     name : str | None 
         Device name.
     current_firmware_version : str | None 
@@ -38,14 +40,15 @@ class DeviceResponse(BaseModel):
         validate_by_alias=True
     )
 
-    biocat_serial:            Annotated[Union[str, None], Field(alias='biocatSerial')]           = None
-    electronics_serial:       Annotated[Union[str, None], Field(alias='electronicsSerial')]      = None
-    device_type_number:       Annotated[Union[str, None], Field(alias='deviceTypeNumber')]       = None
-    line:                     Annotated[Union[str, None], Field(alias='line')]                   = None
-    series:                   Annotated[Union[str, None], Field(alias='series')]                 = None
-    name:                     Annotated[Union[str, None], Field(alias='name')]                   = None
-    current_firmware_version: Annotated[Union[str, None], Field(alias='currentFirmwareVersion')] = None
-    current_hardware_version: Annotated[Union[str, None], Field(alias='currentHardwareVersion')] = None
-    latest_firmware_version:  Annotated[Union[str, None], Field(alias='latestFirmwareVersion')]  = None
-    system_mac_address:       Annotated[Union[str, None], Field(alias='systemMacAddress')]       = None
-    ble_mac_address:          Annotated[Union[str, None], Field(alias='bleMacAddress')]          = None
+    biocat_serial:                 Annotated[Union[str, None], Field(alias='biocatSerial')]               = None
+    electronics_serial:            Annotated[Union[str, None], Field(alias='electronicsSerial')]          = None
+    device_type_number:            Annotated[Union[str, None], Field(alias='deviceTypeNumber')]           = None
+    line:                          Annotated[Union[str, None], Field(alias='line')]                       = None
+    series:                        Annotated[Union[str, None], Field(alias='series')]                     = None
+    has_leakage_protection_system: Annotated[bool,             Field(alias='hasLeakageProtectionSystem')] = False
+    name:                          Annotated[Union[str, None], Field(alias='name')]                       = None
+    current_firmware_version:      Annotated[Union[str, None], Field(alias='currentFirmwareVersion')]     = None
+    current_hardware_version:      Annotated[Union[str, None], Field(alias='currentHardwareVersion')]     = None
+    latest_firmware_version:       Annotated[Union[str, None], Field(alias='latestFirmwareVersion')]      = None
+    system_mac_address:            Annotated[Union[str, None], Field(alias='systemMacAddress')]           = None
+    ble_mac_address:               Annotated[Union[str, None], Field(alias='bleMacAddress')]              = None
