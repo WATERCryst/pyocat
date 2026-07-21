@@ -283,6 +283,7 @@ def test_get_device_info(httpx_mock): # type: ignore
         "deviceTypeNumber": "12000273",
         "line": "BIOCAT",
         "series": "KLS 3000-C",
+        "hasLeakageProtectionSystem": True,
         "name": "Schulungsgerät",
         "currentFirmwareVersion": "V01.05.07",
         "currentHardwareVersion": "2",
@@ -300,6 +301,7 @@ def test_get_device_info(httpx_mock): # type: ignore
         assert resp.device_type_number == "12000273"
         assert resp.line == "BIOCAT"
         assert resp.series == "KLS 3000-C"
+        assert resp.has_leakage_protection_system
         assert resp.name == "Schulungsgerät"
         assert resp.current_firmware_version == "V01.05.07"
         assert resp.current_hardware_version == "2"

@@ -264,6 +264,7 @@ def test_device_response_serialize():
         device_type_number="12000273",
         line="BIOCAT",
         series="KLS 3000-C",
+        has_leakage_protection_system=True,
         name="Schulungsgerät",
         current_firmware_version="V01.05.07",
         current_hardware_version="2",
@@ -271,7 +272,7 @@ def test_device_response_serialize():
         system_mac_address="00:A2:FF:01:EE:DE",
         ble_mac_address="CC:F9:57:8F:EE:C4"
     )
-    json = '{"biocatSerial":"2025001395300149","electronicsSerial":"2041730218","deviceTypeNumber":"12000273","line":"BIOCAT","series":"KLS 3000-C","name":"Schulungsgerät","currentFirmwareVersion":"V01.05.07","currentHardwareVersion":"2","latestFirmwareVersion":"V01.08.05","systemMacAddress":"00:A2:FF:01:EE:DE","bleMacAddress":"CC:F9:57:8F:EE:C4"}'
+    json = '{"biocatSerial":"2025001395300149","electronicsSerial":"2041730218","deviceTypeNumber":"12000273","line":"BIOCAT","series":"KLS 3000-C","hasLeakageProtectionSystem":true,"name":"Schulungsgerät","currentFirmwareVersion":"V01.05.07","currentHardwareVersion":"2","latestFirmwareVersion":"V01.08.05","systemMacAddress":"00:A2:FF:01:EE:DE","bleMacAddress":"CC:F9:57:8F:EE:C4"}'
     assert res.model_dump_json() == json
 
 
@@ -282,6 +283,7 @@ def test_device_response_deserialize():
         device_type_number="12000273",
         line="BIOCAT",
         series="KLS 3000-C",
+        has_leakage_protection_system=True,
         name="Schulungsgerät",
         current_firmware_version="V01.05.07",
         current_hardware_version="2",
@@ -296,6 +298,7 @@ def test_device_response_deserialize():
         "deviceTypeNumber": "12000273",
         "line": "BIOCAT",
         "series": "KLS 3000-C",
+        "hasLeakageProtectionSystem": true,
         "name": "Schulungsgerät",
         "currentFirmwareVersion": "V01.05.07",
         "currentHardwareVersion": "2",
