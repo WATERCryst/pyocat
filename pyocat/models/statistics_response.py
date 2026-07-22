@@ -1,6 +1,5 @@
-from datetime import datetime
 from typing import Annotated, Union
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 
 class StatisticsResponseEntry(BaseModel):
@@ -11,7 +10,7 @@ class StatisticsResponseEntry(BaseModel):
     ----------
     consumption : float | None
         Water consumption for this day in liters [L].
-    date : datetime | None
+    date : AwareDatetime | None
         UTC date of the measurement. 
     """
 
@@ -21,8 +20,8 @@ class StatisticsResponseEntry(BaseModel):
         validate_by_alias=True
     )
 
-    consumption: Annotated[Union[float,    None], Field(alias='consumption')] = None
-    date:        Annotated[Union[datetime, None], Field(alias='date')]        = None
+    consumption: Annotated[Union[float,    None],      Field(alias='consumption')] = None
+    date:        Annotated[Union[AwareDatetime, None], Field(alias='date')]        = None
 
 
 class StatisticsResponse(BaseModel):

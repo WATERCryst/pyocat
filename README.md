@@ -46,7 +46,7 @@ poetry install
 Execute to run the unit tests:
 
 ```bash
-poetry run pytest
+poetry run pytest -vv
 ```
 
 Execute to build the library:

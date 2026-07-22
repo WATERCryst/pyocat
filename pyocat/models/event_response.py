@@ -1,4 +1,3 @@
-# from datetime import datetime
 from typing import Annotated, Literal, Union
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
@@ -20,7 +19,7 @@ class EventResponse(BaseModel):
         Event summary.
     description : str | None
         Detailed description.
-    timestamp : datetime | None
+    timestamp : AwareDatetime | None
         UTC date time of the event.
     """
 
@@ -34,5 +33,4 @@ class EventResponse(BaseModel):
     category:    Annotated[Union[EventCategory, None], Field(alias='category')]    = None
     title:       Annotated[Union[str,           None], Field(alias='title')]       = None
     description: Annotated[Union[str,           None], Field(alias='description')] = None
-#    timestamp:   Annotated[Union[datetime, None], Field(alias='timestamp')]   = None
     timestamp:   Annotated[Union[AwareDatetime, None], Field(alias='timestamp')]   = None
