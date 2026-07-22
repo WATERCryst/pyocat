@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, UTC
 
 from pyocat.models import (
     DeviceResponse,
@@ -19,7 +19,7 @@ def test_event_response_serialization():
         category="info",
         title="Unknown Event",
         description="Unknown Event",
-        timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),
+        timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),
     )
     json = '{"eventId":0,"category":"info","title":"Unknown Event","description":"Unknown Event","timestamp":"2026-06-08T13:13:00Z"}'
     assert res.model_dump_json() == json
@@ -31,7 +31,7 @@ def test_event_response_deserialization():
         category="info",
         title="Unknown Event",
         description="Unknown Event",
-        timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),
+        timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),
     )
     json = """
     {
@@ -84,7 +84,7 @@ def test_measurement_response_deserialization():
 def test_message_response_serialization():
     res = MessageResponse(
         absence_mode_enabled=True,
-        pause_leakage_protection_until_utc=datetime(2026, 6, 9, 14, 58, tzinfo=timezone.utc)
+        pause_leakage_protection_until_utc=datetime(2026, 6, 9, 14, 58, tzinfo=UTC)
     )
     json = '{"absenceModeEnabled":true,"pauseLeakageProtectionUntilUTC":"2026-06-09T14:58:00Z"}'
     assert res.model_dump_json() == json
@@ -93,7 +93,7 @@ def test_message_response_serialization():
 def test_message_response_deserialization():
     res = MessageResponse(
         absence_mode_enabled=True,
-        pause_leakage_protection_until_utc=datetime(2026, 6, 9, 14, 58, tzinfo=timezone.utc)
+        pause_leakage_protection_until_utc=datetime(2026, 6, 9, 14, 58, tzinfo=UTC)
     )
     json = """
     {
@@ -139,11 +139,11 @@ def test_state_response_serialize():
             category="info",
             title="Unknown Event",
             description="Unknown Event",
-            timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),  
+            timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),  
         ),
         water_protection=WaterProtectionResponse(
             absence_mode_enabled=True,
-            pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=timezone.utc)
+            pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=UTC)
         ),
         ml_state='success'
     )
@@ -163,11 +163,11 @@ def test_state_response_deserialize():
             category="info",
             title="Unknown Event",
             description="Unknown Event",
-            timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),  
+            timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),  
         ),
         water_protection=WaterProtectionResponse(
             absence_mode_enabled=True,
-            pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=timezone.utc)
+            pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=UTC)
         ),
         ml_state='success'
     )
@@ -200,11 +200,11 @@ def test_statistics_response_serialize():
         entries=[
             StatisticsResponseEntry(
                 consumption=123.4,
-                date=datetime(2026, 6, 10, tzinfo=timezone.utc)
+                date=datetime(2026, 6, 10, tzinfo=UTC)
             ),
             StatisticsResponseEntry(
                 consumption=234.5,
-                date=datetime(2026, 6, 11, tzinfo=timezone.utc)
+                date=datetime(2026, 6, 11, tzinfo=UTC)
             ),
         ]
     )
@@ -217,11 +217,11 @@ def test_statistics_response_deserialize():
         entries=[
             StatisticsResponseEntry(
                 consumption=123.4,
-                date=datetime(2026, 6, 10, tzinfo=timezone.utc)
+                date=datetime(2026, 6, 10, tzinfo=UTC)
             ),
             StatisticsResponseEntry(
                 consumption=234.5,
-                date=datetime(2026, 6, 11, tzinfo=timezone.utc)
+                date=datetime(2026, 6, 11, tzinfo=UTC)
             ),
         ]
     )
@@ -239,7 +239,7 @@ def test_statistics_response_deserialize():
 def test_water_protection_response_serialize():
     res = WaterProtectionResponse(
         absence_mode_enabled=True,
-        pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=timezone.utc)
+        pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=UTC)
     )
     json = '{"absenceModeEnabled":true,"pauseLeakageProtectionUntilUTC":"2026-06-10T14:16:00Z"}'
     assert res.model_dump_json() == json
@@ -248,7 +248,7 @@ def test_water_protection_response_serialize():
 def test_water_protection_response_deserialize():
     res = WaterProtectionResponse(
         absence_mode_enabled=True,
-        pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=timezone.utc)
+        pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=UTC)
     )
     json = """
     {

@@ -2,8 +2,7 @@ from typing import Any
 
 import httpx
 
-from datetime import datetime
-from pydantic_core import TzInfo
+from datetime import datetime, UTC
 from pyocat import Auth, ApiClient
 
 
@@ -108,11 +107,11 @@ def test_get_daily_statistics(httpx_mock): # type: ignore
         resp = api.get_daily_statistics()
         assert len(resp.entries) == 3
         assert resp.entries[0].consumption == 500.1
-        assert resp.entries[0].date == datetime(2026, 1, 1, tzinfo=TzInfo(0))
+        assert resp.entries[0].date == datetime(2026, 1, 1, tzinfo=UTC)
         assert resp.entries[1].consumption == 501.1
-        assert resp.entries[1].date == datetime(2026, 1, 2, tzinfo=TzInfo(0))
+        assert resp.entries[1].date == datetime(2026, 1, 2, tzinfo=UTC)
         assert resp.entries[2].consumption == 502.1
-        assert resp.entries[2].date == datetime(2026, 1, 3, tzinfo=TzInfo(0))
+        assert resp.entries[2].date == datetime(2026, 1, 3, tzinfo=UTC)
 
 
 def test_get_todays_consumption(httpx_mock): # type: ignore
@@ -186,7 +185,7 @@ def test_get_state_1(httpx_mock): # type: ignore
         assert resp.event.category == "error"
         assert resp.event.title == "65 --  Mindestvolumenstrom unterschritten"
         assert resp.event.description == "Der Mindestvolumenstrom wurde nicht erreicht oder hat die vorgegebene Grenze unterschritten."
-        assert resp.event.timestamp == datetime(2026, 5, 12, 14, 54, tzinfo=TzInfo(0))
+        assert resp.event.timestamp == datetime(2026, 5, 12, 14, 54, tzinfo=UTC)
 
 
 def test_get_state_2(httpx_mock): # type: ignore
@@ -225,10 +224,10 @@ def test_get_state_2(httpx_mock): # type: ignore
         assert resp.event.category == "error"
         assert resp.event.title == "65 --  Mindestvolumenstrom unterschritten"
         assert resp.event.description == "Der Mindestvolumenstrom wurde nicht erreicht oder hat die vorgegebene Grenze unterschritten."
-        assert resp.event.timestamp == datetime(2026, 5, 12, 14, 54, tzinfo=TzInfo(0))
+        assert resp.event.timestamp == datetime(2026, 5, 12, 14, 54, tzinfo=UTC)
         if resp.water_protection:
             assert resp.water_protection.absence_mode_enabled
-            assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=TzInfo(0))
+            assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=UTC)
         assert resp.ml_state == "running"
 
 
@@ -271,7 +270,7 @@ def test_get_state_3(httpx_mock): # type: ignore
         assert resp.event.timestamp is None
         if resp.water_protection:
             assert not resp.water_protection.absence_mode_enabled
-            assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=TzInfo(0))
+            assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=UTC)
         assert resp.ml_state == "success"
 
 
