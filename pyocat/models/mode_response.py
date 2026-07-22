@@ -2,7 +2,7 @@ from typing import Annotated, Literal, Union
 from pydantic import BaseModel, ConfigDict, Field
 
 
-ModeId = Literal['ER', 'FS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
+ModeId = Literal['ER', 'FS', 'LS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
 """
 Specifies the current mode of operation.
 
@@ -12,6 +12,8 @@ Specifies the current mode of operation.
 | ER   | Error mode.                      |
 +------+----------------------------------+
 | FS   | Failsafe mode.                   |
++------+----------------------------------+
+| LS   | Leakage protection.              |
 +------+----------------------------------+
 | MC   | Manual control.                  |
 +------+----------------------------------+
@@ -36,7 +38,7 @@ class ModeResponse(BaseModel):
 
     Attributes
     ----------
-    id : 'ER' | 'FS' | 'MC' | 'RS' | 'ST' | 'TD' | 'UD' | 'WO' | 'WT' | None
+    id : 'ER' | 'FS' | 'LS' | 'MC' | 'RS' | 'ST' | 'TD' | 'UD' | 'WO' | 'WT' | None
         Mode identifier.
     name : str | None
         Mode display name.
