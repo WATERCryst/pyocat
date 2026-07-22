@@ -18,8 +18,18 @@ class DeviceResponse(BaseModel):
         Product line.
     series : str | None 
         Product series.
+    has_flow_rate_sensor: bool
+        Whether this device has a water flow rate sensor.
+    has_temperature_sensor: bool 
+        Whether this device has a water temperature sensor.
+    has_pressure_sensor: bool
+        Whether this device has a water pressure sensor.
+    has_lime_scale_protection: bool
+        Whether this device has lime scale protection.
     has_leakage_protection_system: bool
-        Whether this device supports leakage protection.
+        Whether this device has leakage protection.
+    has_wireless_sensor_option: bool
+        Whether this device supports wireless water detector sensors.
     name : str | None 
         Device name.
     current_firmware_version : str | None 
@@ -45,7 +55,12 @@ class DeviceResponse(BaseModel):
     device_type_number:            Annotated[Union[str, None], Field(alias='deviceTypeNumber')]           = None
     line:                          Annotated[Union[str, None], Field(alias='line')]                       = None
     series:                        Annotated[Union[str, None], Field(alias='series')]                     = None
+    has_flow_rate_sensor:          Annotated[bool,             Field(alias='hasFlowRateSensor')]          = False
+    has_temperature_sensor:        Annotated[bool,             Field(alias='hasTemperatureSensor')]       = False
+    has_pressure_sensor:           Annotated[bool,             Field(alias='hasPressureSensor')]          = False
+    has_lime_scale_protection:     Annotated[bool,             Field(alias='hasLimeScaleProtection')]     = False
     has_leakage_protection_system: Annotated[bool,             Field(alias='hasLeakageProtectionSystem')] = False
+    has_wireless_sensor_option:    Annotated[bool,             Field(alias='hasWirelessSensorOption')]    = False
     name:                          Annotated[Union[str, None], Field(alias='name')]                       = None
     current_firmware_version:      Annotated[Union[str, None], Field(alias='currentFirmwareVersion')]     = None
     current_hardware_version:      Annotated[Union[str, None], Field(alias='currentHardwareVersion')]     = None

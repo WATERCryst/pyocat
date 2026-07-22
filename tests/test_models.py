@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pyocat.models import (
     DeviceResponse,
@@ -19,9 +19,9 @@ def test_event_response_serialization():
         category="info",
         title="Unknown Event",
         description="Unknown Event",
-        timestamp=datetime(2026, 6, 8, 13, 13),
+        timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),
     )
-    json = '{"eventId":0,"category":"info","title":"Unknown Event","description":"Unknown Event","timestamp":"2026-06-08T13:13:00"}'
+    json = '{"eventId":0,"category":"info","title":"Unknown Event","description":"Unknown Event","timestamp":"2026-06-08T13:13:00.0000000Z"}'
     assert res.model_dump_json() == json
 
 
@@ -31,7 +31,7 @@ def test_event_response_deserialization():
         category="info",
         title="Unknown Event",
         description="Unknown Event",
-        timestamp=datetime(2026, 6, 8, 13, 13),
+        timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),
     )
     json = """
     {
@@ -40,7 +40,7 @@ def test_event_response_deserialization():
         "category": "info",
         "title": "Unknown Event",
         "description": "Unknown Event",
-        "timestamp": "2026-06-08T13:13:00"
+        "timestamp": "2026-06-08T13:13:00.0000000Z"
     }
     """
     assert EventResponse.model_validate_json(json) == res
@@ -137,7 +137,7 @@ def test_state_response_serialize():
             category="info",
             title="Unknown Event",
             description="Unknown Event",
-            timestamp=datetime(2026, 6, 8, 13, 13),  
+            timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),  
         ),
         water_protection=WaterProtectionResponse(
             absence_mode_enabled=True,
@@ -161,7 +161,7 @@ def test_state_response_deserialize():
             category="info",
             title="Unknown Event",
             description="Unknown Event",
-            timestamp=datetime(2026, 6, 8, 13, 13),  
+            timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=timezone.utc),  
         ),
         water_protection=WaterProtectionResponse(
             absence_mode_enabled=True,
