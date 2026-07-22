@@ -1,6 +1,6 @@
 [project]
 name = "pyocat"
-version = "1.1.0"
+version = "1.2.0"
 description = "Python client library to connect to BIOCAT devices."
 authors = [{ name = "WATERCryst Developers", email = "appservice@watercryst.com" }]
 maintainers = [{ name = "WATERCryst Developers", email = "appservice@watercryst.com" }]
