@@ -2,16 +2,19 @@ from typing import Mapping, Union
 
 from httpx import AsyncClient, Response
 
+from ._http import raise_for_status
+
+
 class AsyncAuth:
     """
     Make asynchronous authenticated requests.
     """
 
     def __init__(
-        self,
-        client: AsyncClient,
-        api_key: str,
-        host: str = 'https://appapi.watercryst.com'
+            self,
+            client: AsyncClient,
+            api_key: str,
+            host: str = 'https://appapi.watercryst.com'
     ):
         """
         Creates a new authenticated request sender.
@@ -30,11 +33,10 @@ class AsyncAuth:
         self.api_key = api_key
         self.host = host
 
-
     async def get(
-        self,
-        path: str,
-        params: Mapping[str, Union[str, int, float, bool]] | None = None,
+            self,
+            path: str,
+            params: Mapping[str, Union[str, int, float, bool]] | None = None,
     ) -> Response:
         """
         Send an asynchronous `GET` request.
@@ -54,10 +56,9 @@ class AsyncAuth:
         headers['X-API-KEY'] = self.api_key
 
         response = await self.client.get(
-            url=f'{self.host}/{path}', 
+            url=f'{self.host}/{path}',
             params=params,
             headers=headers
         )
-        response.raise_for_status()
-
+        raise_for_status(response)
         return response
