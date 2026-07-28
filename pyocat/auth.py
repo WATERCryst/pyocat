@@ -1,6 +1,10 @@
 from typing import Mapping, Union
 
-from httpx import Client, Response
+from httpx import Client, Response, HTTPStatusError
+
+from pyocat.exceptions import WTCApiTemporaryError, WTCApiDisabledError, \
+    WTCApiUnauthorizedError
+
 
 class Auth:
     """
@@ -52,12 +56,21 @@ class Auth:
         """
         headers = dict[str, str]()
         headers['X-API-KEY'] = self.api_key
-
-        response = self.client.get(
-            url=f'{self.host}/{path}', 
-            params=params,
-            headers=headers
-        )
-        response.raise_for_status()
-
-        return response
+        try:
+            response = self.client.get(
+                url=f'{self.host}/{path}',
+                params=params,
+                headers=headers
+            )
+            response.raise_for_status()
+            return response
+        except HTTPStatusError as err:
+            match err.response.status_code:
+                case 401:
+                    raise WTCApiUnauthorizedError() from err
+                case 403:
+                    raise WTCApiDisabledError() from err
+                case  status if status == 429 or status >= 500:
+                    raise WTCApiTemporaryError() from err
+                case _:
+                    raise
