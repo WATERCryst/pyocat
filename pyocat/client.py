@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Literal
 
-from .models import DeviceResponse
-from .models import MeasurementResponse
-from .models import StatisticsResponse
-from .models import StateResponse
-
+from .models import (
+    DeviceResponse,
+    MeasurementResponse,
+    StateResponse,
+    StatisticsResponse,
+)
 
 type Locales = Literal['de', 'en', 'es', 'cs', 'da'] 
 """Supported locales."""

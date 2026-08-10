@@ -1,6 +1,6 @@
-from typing import Annotated, Literal, Union
-from pydantic import BaseModel, ConfigDict, Field
+from typing import Annotated, Literal
 
+from pydantic import BaseModel, ConfigDict, Field
 
 ModeId = Literal['ER', 'FS', 'LS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
 """
@@ -50,5 +50,5 @@ class ModeResponse(BaseModel):
         validate_by_alias=True
     )
 
-    id:   Annotated[Union[ModeId, None], Field(alias='id')]   = None
-    name: Annotated[Union[str,    None], Field(alias='name')] = None
+    id:   Annotated[ModeId | None, Field(alias='id')]   = None
+    name: Annotated[str    | None, Field(alias='name')] = None

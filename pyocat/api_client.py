@@ -1,9 +1,11 @@
 from .auth import Auth
 from .client import Client, Formats, Locales
-from .models import DeviceResponse
-from .models import MeasurementResponse
-from .models import StatisticsResponse
-from .models import StateResponse
+from .models import (
+    DeviceResponse,
+    MeasurementResponse,
+    StateResponse,
+    StatisticsResponse,
+)
 
 
 class ApiClient(Client):

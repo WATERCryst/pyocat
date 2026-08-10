@@ -1,4 +1,4 @@
-from typing import Mapping, Union
+from collections.abc import Mapping
 
 from httpx import AsyncClient, Response
 
@@ -34,9 +34,9 @@ class AsyncAuth:
         self.host = host
 
     async def get(
-            self,
-            path: str,
-            params: Mapping[str, Union[str, int, float, bool]] | None = None,
+        self,
+        path: str,
+        params: Mapping[str, str | int | float | bool] | None = None,
     ) -> Response:
         """
         Send an asynchronous `GET` request.

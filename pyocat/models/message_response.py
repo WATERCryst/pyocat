@@ -1,4 +1,5 @@
-from typing import Annotated, Union
+from typing import Annotated
+
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 
@@ -21,5 +22,5 @@ class MessageResponse(BaseModel):
         validate_by_alias=True
     )
 
-    absence_mode_enabled:               Annotated[Union[bool,     None],      Field(alias='absenceModeEnabled')]             = None
-    pause_leakage_protection_until_utc: Annotated[Union[AwareDatetime, None], Field(alias='pauseLeakageProtectionUntilUTC')] = None
+    absence_mode_enabled:               Annotated[bool          | None, Field(alias='absenceModeEnabled')]             = None
+    pause_leakage_protection_until_utc: Annotated[AwareDatetime | None, Field(alias='pauseLeakageProtectionUntilUTC')] = None

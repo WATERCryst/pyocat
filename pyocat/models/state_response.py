@@ -1,10 +1,10 @@
-from typing import Annotated, Literal, Union
+from typing import Annotated, Literal
+
 from pydantic import BaseModel, ConfigDict, Field
 
 from .event_response import EventResponse
 from .mode_response import ModeResponse
 from .water_protection_response import WaterProtectionResponse
-
 
 MlState = Literal[ 
     "cancelled",
@@ -43,8 +43,8 @@ class StateResponse(BaseModel):
         validate_by_alias=True
     )
 
-    online:           Annotated[Union[bool,                    None], Field(alias='online')]          = None
-    mode:             Annotated[Union[ModeResponse,            None], Field(alias='mode')]            = None
-    event:            Annotated[Union[EventResponse,           None], Field(alias='event')]           = None
-    water_protection: Annotated[Union[WaterProtectionResponse, None], Field(alias='waterProtection')] = None
-    ml_state:         Annotated[Union[MlState,                 None], Field(alias='mlState')]         = None
+    online:           Annotated[bool                    | None, Field(alias='online')]          = None
+    mode:             Annotated[ModeResponse            | None, Field(alias='mode')]            = None
+    event:            Annotated[EventResponse           | None, Field(alias='event')]           = None
+    water_protection: Annotated[WaterProtectionResponse | None, Field(alias='waterProtection')] = None
+    ml_state:         Annotated[MlState                 | None, Field(alias='mlState')]         = None

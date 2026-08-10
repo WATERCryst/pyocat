@@ -1,9 +1,8 @@
-from typing import Mapping, Union
+from collections.abc import Mapping
 
 from httpx import Client, Response
 
 from ._http import raise_for_status
-
 
 
 class Auth:
@@ -38,7 +37,7 @@ class Auth:
     def get(
         self,
         path: str,
-        params: Mapping[str, Union[str, int, float, bool]] | None = None,
+        params: Mapping[str, str | int | float | bool] | None = None,
     ) -> Response:
         """
         Send a `GET` request.

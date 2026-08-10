@@ -1,6 +1,6 @@
-from typing import Annotated, Literal, Union
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from typing import Annotated, Literal
 
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 EventCategory = Literal['error', 'warning', 'info']
 
@@ -29,8 +29,8 @@ class EventResponse(BaseModel):
         validate_by_alias=True
     )
 
-    event_id:    Annotated[Union[int,           None], Field(alias="eventId")]     = None
-    category:    Annotated[Union[EventCategory, None], Field(alias='category')]    = None
-    title:       Annotated[Union[str,           None], Field(alias='title')]       = None
-    description: Annotated[Union[str,           None], Field(alias='description')] = None
-    timestamp:   Annotated[Union[AwareDatetime, None], Field(alias='timestamp')]   = None
+    event_id:    Annotated[int           | None, Field(alias="eventId")]     = None
+    category:    Annotated[EventCategory | None, Field(alias='category')]    = None
+    title:       Annotated[str           | None, Field(alias='title')]       = None
+    description: Annotated[str           | None, Field(alias='description')] = None
+    timestamp:   Annotated[AwareDatetime | None, Field(alias='timestamp')]   = None

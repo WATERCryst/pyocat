@@ -1,4 +1,5 @@
-from typing import Annotated, Union
+from typing import Annotated
+
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 
@@ -20,8 +21,8 @@ class StatisticsResponseEntry(BaseModel):
         validate_by_alias=True
     )
 
-    consumption: Annotated[Union[float,    None],      Field(alias='consumption')] = None
-    date:        Annotated[Union[AwareDatetime, None], Field(alias='date')]        = None
+    consumption: Annotated[float         | None, Field(alias='consumption')] = None
+    date:        Annotated[AwareDatetime | None, Field(alias='date')]        = None
 
 
 class StatisticsResponse(BaseModel):
