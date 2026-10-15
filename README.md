@@ -37,6 +37,17 @@ if __name__ == "__main__":
 
 ## Development
 
+Set-up poetry and venv:
+
+```bash
+sudo apt update
+sudo apt install pipx -y
+pipx ensurepath
+pipx install poetry
+# Reopen terminal.
+poetry install
+```
+
 Execute to download dependencies:
 
 ```bash

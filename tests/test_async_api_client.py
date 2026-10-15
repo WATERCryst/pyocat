@@ -192,7 +192,7 @@ async def test_get_state_1(httpx_mock): # type: ignore
         resp = await api.get_state()
         assert resp.online
         assert resp.mode
-        assert resp.mode.id == "ER"
+        assert resp.mode.id == "error_mode"
         assert resp.mode.name == "Error"
         assert resp.event
         assert resp.event.event_id == 65
@@ -232,7 +232,7 @@ async def test_get_state_2(httpx_mock): # type: ignore
         resp = await api.get_state()
         assert resp.online
         assert resp.mode
-        assert resp.mode.id == "ER"
+        assert resp.mode.id == "error_mode"
         assert resp.mode.name == "Error"
         assert resp.event
         assert resp.event.event_id == 65
@@ -267,7 +267,7 @@ async def test_get_state_3(httpx_mock): # type: ignore
             "absenceModeEnabled": False,
             "pauseLeakageProtectionUntilUTC": "2000-01-01T00:00:00.0000000Z"
         },
-        "mlState": "success"
+        "mlState": "failure-unknown"
     }
     httpx_mock.add_response(url=URL, json=JSON) # type: ignore
     async with httpx.AsyncClient() as client:
@@ -276,7 +276,7 @@ async def test_get_state_3(httpx_mock): # type: ignore
         resp = await api.get_state()
         assert resp.online
         assert resp.mode
-        assert resp.mode.id == "WT"
+        assert resp.mode.id == "water_treatment"
         assert resp.mode.name == "Water Treatment"
         assert resp.event
         assert resp.event.event_id == 0
@@ -287,7 +287,7 @@ async def test_get_state_3(httpx_mock): # type: ignore
         if resp.water_protection:
             assert not resp.water_protection.absence_mode_enabled
             assert resp.water_protection.pause_leakage_protection_until_utc == datetime(2000, 1, 1, tzinfo=UTC)
-        assert resp.ml_state == "success"
+        assert resp.ml_state == "failure_unknown"
 
 
 @pytest.mark.asyncio

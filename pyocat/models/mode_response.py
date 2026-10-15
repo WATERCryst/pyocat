@@ -1,34 +1,42 @@
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, PlainSerializer
 
-ModeId = Literal['ER', 'FS', 'LS', 'MC', 'RS', 'ST', 'TD', 'UD', 'WO', 'WT']
+MODES = {
+    "ER": "error_mode",
+    "FS": "fail_safe",
+    "LS": "leakage_protection",
+    "MC": "manual_control",
+    "RS": "rinse",
+    "ST": "self_test",
+    "TD": "thermal_disinfection",
+    "UD": "update",
+    "WO": "water_off",
+    "WT": "water_treatment",
+}
+"""
+Mode short codes to readable strings mapping.
+"""
+
+INVERSE_MODES = {v: k for k, v in MODES.items()}
+"""
+Mode readable strings to short code mapping.
+"""
+
+ModeId = Literal[
+    "error_mode",
+    "fail_safe",
+    "leakage_protection",
+    "manual_control",
+    "rinse",
+    "self_test",
+    "thermal_disinfection",
+    "update",
+    "water_off",
+    "water_treatment"
+]
 """
 Specifies the current mode of operation.
-
-+------+----------------------------------+
-| Mode | Description                      |
-+------+----------------------------------+
-| ER   | Error mode.                      |
-+------+----------------------------------+
-| FS   | Failsafe mode.                   |
-+------+----------------------------------+
-| LS   | Leakage protection.              |
-+------+----------------------------------+
-| MC   | Manual control.                  |
-+------+----------------------------------+
-| RS   | Rinse.                           |
-+------+----------------------------------+
-| ST   | Self test.                       |
-+------+----------------------------------+
-| TD   | Thermal disinfection.            |
-+------+----------------------------------+
-| UD   | Update.                          |
-+------+----------------------------------+
-| WO   | Water off.                       |
-+------+----------------------------------+
-| WT   | Water treatment.                 |
-+------+----------------------------------+
 """
 
 
@@ -38,7 +46,7 @@ class ModeResponse(BaseModel):
 
     Attributes
     ----------
-    id : 'ER' | 'FS' | 'LS' | 'MC' | 'RS' | 'ST' | 'TD' | 'UD' | 'WO' | 'WT' | None
+    id : ModeId | None
         Mode identifier.
     name : str | None
         Mode display name.
@@ -50,5 +58,14 @@ class ModeResponse(BaseModel):
         validate_by_alias=True
     )
 
-    id:   Annotated[ModeId | None, Field(alias='id')]   = None
-    name: Annotated[str    | None, Field(alias='name')] = None
+    id: Annotated[
+        ModeId | None, 
+        Field(alias='id'), 
+        BeforeValidator(lambda v: MODES.get(v, v)),
+        PlainSerializer(lambda v: INVERSE_MODES.get(v, v))
+    ] = None
+
+    name: Annotated[
+        str | None, 
+        Field(alias='name')
+    ] = None

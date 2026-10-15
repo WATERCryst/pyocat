@@ -21,5 +21,12 @@ class WaterProtectionResponse(BaseModel):
         validate_by_alias=True
     )
 
-    absence_mode_enabled:               Annotated[bool          | None, Field(alias='absenceModeEnabled')]             = None
-    pause_leakage_protection_until_utc: Annotated[AwareDatetime | None, Field(alias='pauseLeakageProtectionUntilUTC')] = None
+    absence_mode_enabled: Annotated[
+        bool | None, 
+        Field(alias='absenceModeEnabled')
+    ] = None
+
+    pause_leakage_protection_until_utc: Annotated[
+        AwareDatetime | None, 
+        Field(alias='pauseLeakageProtectionUntilUTC')
+    ] = None
