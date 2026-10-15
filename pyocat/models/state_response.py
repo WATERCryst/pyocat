@@ -1,4 +1,5 @@
-from typing import Annotated, Literal
+from enum import Enum
+from typing import Annotated, Any, Dict
 
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, PlainSerializer
 
@@ -6,37 +7,51 @@ from .event_response import EventResponse
 from .mode_response import ModeResponse
 from .water_protection_response import WaterProtectionResponse
 
-ML_STATES = {
-    "cancelled": "cancelled",
-    "failure-pressure-drop": "failure_pressure_drop",
-    "failure-start-pressure": "failure_start_pressure",
-    "failure-unknown": "failure_unknown",
-    "failure-water-tap": "failure_water_tap",
-    "idle": "idle",
-    "leakage": "leakage",
-    "running": "running",
-    "success": "success",
+class MlState(str, Enum):
+    CANCELLED = "cancelled"
+    FAILURE_PRESSURE_DROP = "failure_pressure_drop"
+    FAILURE_START_PRESSURE = "failure_start_pressure"
+    FAILURE_UNKNOWN = "failure_unknown"
+    FAILURE_WATER_TAP = "failure_water_tap"
+    IDLE = "idle"
+    LEAKAGE = "leakage"
+    RUNNING = "running"
+    SUCCESS = "success"
+
+
+ML_STATES: Dict[str, MlState] = {
+    "cancelled": MlState.CANCELLED,
+    "failure-pressure-drop": MlState.FAILURE_PRESSURE_DROP,
+    "failure-start-pressure": MlState.FAILURE_START_PRESSURE,
+    "failure-unknown": MlState.FAILURE_UNKNOWN,
+    "failure-water-tap": MlState.FAILURE_WATER_TAP,
+    "idle": MlState.IDLE,
+    "leakage": MlState.LEAKAGE,
+    "running": MlState.RUNNING,
+    "success": MlState.SUCCESS,
 }
 """
 ML states to python strings mapping.
 """
 
-INVERSE_ML_STATES = {v: k for k, v in ML_STATES.items()}
+INVERSE_ML_STATES: Dict[MlState, str] = {v: k for k, v in ML_STATES.items()}
 """
 Python strings to ML states mapping.
 """
 
-MlState = Literal[ 
-    "cancelled",
-    "failure_pressure_drop",
-    "failure_start_pressure",
-    "failure_unknown",
-    "failure_water_tap",
-    "idle",
-    "leakage",
-    "running",
-    "success"
-]
+
+def validate_ml_state(v: Any) -> Any:
+    if v is None:
+        return None
+    if isinstance(v, str) and v in ML_STATES:
+        return ML_STATES[v]
+    return v
+
+
+def serialize_ml_state(v: MlState | None) -> str | None:
+    if v is None:
+        return None
+    return INVERSE_ML_STATES.get(v)
 
 
 class StateResponse(BaseModel):
@@ -86,6 +101,6 @@ class StateResponse(BaseModel):
     ml_state: Annotated[
         MlState | None, 
         Field(alias='mlState'),
-        BeforeValidator(lambda v: ML_STATES.get(v, v)),
-        PlainSerializer(lambda v: INVERSE_ML_STATES.get(v, v))
+        BeforeValidator(validate_ml_state),
+        PlainSerializer(serialize_ml_state)
     ] = None

@@ -1,43 +1,57 @@
-from typing import Annotated, Literal
+from enum import Enum
+from typing import Annotated, Any, Dict
 
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, PlainSerializer
 
-MODES = {
-    "ER": "error_mode",
-    "FS": "fail_safe",
-    "LS": "leakage_protection",
-    "MC": "manual_control",
-    "RS": "rinse",
-    "ST": "self_test",
-    "TD": "thermal_disinfection",
-    "UD": "update",
-    "WO": "water_off",
-    "WT": "water_treatment",
+class ModeId(str, Enum):
+    ERROR_MODE = "error_mode"
+    FAIL_SAFE = "fail_safe"
+    LEAKAGE_PROTECTION = "leakage_protection"
+    MANUAL_CONTROL = "manual_control"
+    RINSE = "rinse"
+    SELF_TEST = "self_test"
+    THERMAL_DISINFECTION = "thermal_disinfection"
+    UPDATE = "update"
+    WATER_OFF = "water_off"
+    WATER_TREATMENT = "water_treatment"
+"""
+Specifies the current mode of operation.
+"""
+
+MODES: Dict[str, ModeId] = {
+    "ER": ModeId.ERROR_MODE,
+    "FS": ModeId.FAIL_SAFE,
+    "LS": ModeId.LEAKAGE_PROTECTION,
+    "MC": ModeId.MANUAL_CONTROL,
+    "RS": ModeId.RINSE,
+    "ST": ModeId.SELF_TEST,
+    "TD": ModeId.THERMAL_DISINFECTION,
+    "UD": ModeId.UPDATE,
+    "WO": ModeId.WATER_OFF,
+    "WT": ModeId.WATER_TREATMENT,
 }
 """
 Mode short codes to readable strings mapping.
 """
 
-INVERSE_MODES = {v: k for k, v in MODES.items()}
+INVERSE_MODES: Dict[ModeId, str] = {v: k for k, v in MODES.items()}
 """
 Mode readable strings to short code mapping.
 """
 
-ModeId = Literal[
-    "error_mode",
-    "fail_safe",
-    "leakage_protection",
-    "manual_control",
-    "rinse",
-    "self_test",
-    "thermal_disinfection",
-    "update",
-    "water_off",
-    "water_treatment"
-]
-"""
-Specifies the current mode of operation.
-"""
+
+def validate_mode_id(v: Any) -> Any:
+    if v is None:
+        return None
+    if isinstance(v, str) and v in MODES:
+        return MODES[v]
+    return v
+
+
+def serialize_mode_id(v: ModeId | None) -> str | None:
+    if v is None:
+        return None
+    return INVERSE_MODES.get(v)
 
 
 class ModeResponse(BaseModel):
@@ -61,8 +75,8 @@ class ModeResponse(BaseModel):
     id: Annotated[
         ModeId | None, 
         Field(alias='id'), 
-        BeforeValidator(lambda v: MODES.get(v, v)),
-        PlainSerializer(lambda v: INVERSE_MODES.get(v, v))
+        BeforeValidator(validate_mode_id),
+        PlainSerializer(serialize_mode_id)
     ] = None
 
     name: Annotated[

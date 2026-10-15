@@ -5,11 +5,13 @@ from pyocat.models import (
     EventResponse, 
     MeasurementResponse,
     MessageResponse,
+    MlState,
+    ModeId,
     ModeResponse,
     StateResponse,
     StatisticsResponse,
     StatisticsResponseEntry,
-    WaterProtectionResponse
+    WaterProtectionResponse,
 )
 
 
@@ -106,7 +108,7 @@ def test_message_response_deserialization():
 
 def test_mode_response_serialization():
     res = ModeResponse(
-        id="thermal_disinfection",
+        id=ModeId.THERMAL_DISINFECTION,
         name="Thermal Disinfection"
     )
     json = '{"id":"TD","name":"Thermal Disinfection"}'
@@ -115,7 +117,7 @@ def test_mode_response_serialization():
 
 def test_mode_response_deserialization():
     res = ModeResponse(
-        id="thermal_disinfection",
+        id=ModeId.THERMAL_DISINFECTION,
         name="Thermal Disinfection"
     )
     json = """
@@ -131,7 +133,7 @@ def test_state_response_serialize():
     res = StateResponse(
         online=True,
         mode=ModeResponse(
-            id="thermal_disinfection",
+            id=ModeId.THERMAL_DISINFECTION,
             name="Thermal Disinfection"
         ),
         event=EventResponse(
@@ -145,7 +147,7 @@ def test_state_response_serialize():
             absence_mode_enabled=True,
             pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=UTC)
         ),
-        ml_state='failure_pressure_drop'
+        ml_state=MlState.FAILURE_PRESSURE_DROP
     )
     json = '{"online":true,"mode":{"id":"TD","name":"Thermal Disinfection"},"event":{"eventId":0,"category":"info","title":"Unknown Event","description":"Unknown Event","timestamp":"2026-06-08T13:13:00Z"},"waterProtection":{"absenceModeEnabled":true,"pauseLeakageProtectionUntilUTC":"2026-06-10T14:16:00Z"},"mlState":"failure-pressure-drop"}'
     assert res.model_dump_json() == json
@@ -155,7 +157,7 @@ def test_state_response_deserialize():
     res = StateResponse(
         online=True,
         mode=ModeResponse(
-            id="thermal_disinfection",
+            id=ModeId.THERMAL_DISINFECTION,
             name="Thermal Disinfection"
         ),
         event=EventResponse(
@@ -169,7 +171,7 @@ def test_state_response_deserialize():
             absence_mode_enabled=True,
             pause_leakage_protection_until_utc=datetime(2026, 6, 10, 14, 16, tzinfo=UTC)
         ),
-        ml_state='failure_pressure_drop'
+        ml_state=MlState.FAILURE_PRESSURE_DROP
     )
     json = """
     {

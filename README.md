@@ -66,6 +66,12 @@ Execute to build the library:
 poetry build
 ```
 
+## Release
+
+Update version string in `pyproject.toml`.
+On GitHub navigate to Releases and create a new tag and release with the same version.
+The CI/CD pipeline autoamtically builds and releases the new version on PyPI.
+
 ## License
 
 MIT License
