@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-from httpx import Client, Response
+from httpx2 import Client, Response
 
 from ._http import raise_for_status
 
@@ -21,7 +21,7 @@ class Auth:
 
         Parameters
         ----------
-        client: `httpx.Client`
+        client: `httpx2.Client`
             Instance of a synchronous HTTP client.
         api_key : str
             The api key.
@@ -51,7 +51,7 @@ class Auth:
 
         Returns
         -------
-        An `httpx.Response`.
+        An `httpx2.Response`.
         """
         headers = dict[str, str]()
         headers['X-API-KEY'] = self.api_key

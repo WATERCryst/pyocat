@@ -1,6 +1,6 @@
 """HTTP response helpers."""
 
-from httpx import HTTPStatusError, Response
+from httpx2 import HTTPStatusError, Response
 
 from .exceptions import (
     WTCApiDisabledError,

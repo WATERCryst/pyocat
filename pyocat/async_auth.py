@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-from httpx import AsyncClient, Response
+from httpx2 import AsyncClient, Response
 
 from ._http import raise_for_status
 
@@ -11,17 +11,17 @@ class AsyncAuth:
     """
 
     def __init__(
-            self,
-            client: AsyncClient,
-            api_key: str,
-            host: str = 'https://appapi.watercryst.com'
+        self,
+        client: AsyncClient,
+        api_key: str,
+        host: str = 'https://appapi.watercryst.com'
     ):
         """
         Creates a new authenticated request sender.
 
         Parameters
         ----------
-        client: `httpx.AsyncClient`
+        client: `httpx2.AsyncClient`
             Instance of an asynchronous HTTP client.
         api_key : str
             The api key.
@@ -32,6 +32,7 @@ class AsyncAuth:
         self.client = client
         self.api_key = api_key
         self.host = host
+
 
     async def get(
         self,
@@ -50,11 +51,10 @@ class AsyncAuth:
 
         Returns
         -------
-        An `httpx.Response`.
+        An `httpx2.Response`.
         """
         headers = dict[str, str]()
         headers['X-API-KEY'] = self.api_key
-
         response = await self.client.get(
             url=f'{self.host}/{path}',
             params=params,

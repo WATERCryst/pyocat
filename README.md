@@ -20,12 +20,12 @@ pip install pyocat
 
 ```python
 import asyncio
-import httpx
+import httpx2
 
 from pyocat import AsyncAuth, AsyncApiClient
 
 async def main():
-    async with httpx.AsyncClient() as client:
+    async with httpx2.AsyncClient(timeout=10) as client:
         auth = AsyncAuth(client, "<api-key>")
         api = AsyncApiClient(auth)
         state = await api.get_state()
@@ -44,7 +44,7 @@ sudo apt update
 sudo apt install pipx -y
 pipx ensurepath
 pipx install poetry
-# Reopen terminal.
+source ~/.bashrc
 poetry install
 ```
 
