@@ -4,7 +4,9 @@ from httpx2 import HTTPStatusError, Response
 
 from .exceptions import (
     WTCApiDisabledError,
-    WTCApiTemporaryError,
+    WTCApiQuotaExceededError,
+    WTCApiRequestError,
+    WTCApiServerError,
     WTCApiUnauthorizedError,
 )
 
@@ -19,7 +21,9 @@ def raise_for_status(response: Response) -> None:
                 raise WTCApiUnauthorizedError() from err
             case 403:
                 raise WTCApiDisabledError() from err
-            case status if status == 429 or status >= 500:
-                raise WTCApiTemporaryError() from err
+            case 429:
+                raise WTCApiQuotaExceededError() from err
+            case status if status >= 500:
+                raise WTCApiServerError() from err
             case _:
-                raise
+                raise WTCApiRequestError() from err

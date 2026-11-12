@@ -1,0 +1,62 @@
+Date : 2026-10-28 10:17:37
+Directory : /home/sysadmin/Sources/pyocat
+Total : 28 files,  2053 codes, 480 comments, 461 blanks, all 2994 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |         22 |      1,401 |        463 |        350 |      2,214 |
+| TOML     |          3 |        499 |          1 |         53 |        553 |
+| YAML     |          2 |         79 |         16 |         27 |        122 |
+| Markdown |          1 |         74 |          0 |         31 |        105 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                        |         28 |      2,053 |        480 |        461 |      2,994 |
+| . (Files)                                                                |          4 |        573 |          1 |         84 |        658 |
+| .github                                                                  |          2 |         79 |         16 |         27 |        122 |
+| .github/workflows                                                        |          2 |         79 |         16 |         27 |        122 |
+| pyocat                                                                   |         18 |        519 |        463 |        244 |      1,226 |
+| pyocat (Files)                                                           |          9 |        285 |        307 |        167 |        759 |
+| pyocat/models                                                            |          9 |        234 |        156 |         77 |        467 |
+| tests                                                                    |          4 |        882 |          0 |        106 |        988 |
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/sysadmin/Sources/pyocat/.github/workflows/push.pipeline.yml        | YAML     |         28 |          0 |         10 |         38 |
+| /home/sysadmin/Sources/pyocat/.github/workflows/release.pipeline.yml     | YAML     |         51 |         16 |         17 |         84 |
+| /home/sysadmin/Sources/pyocat/README.md                                  | Markdown |         74 |          0 |         31 |        105 |
+| /home/sysadmin/Sources/pyocat/poetry.lock                                | TOML     |        466 |          1 |         48 |        515 |
+| /home/sysadmin/Sources/pyocat/poetry.toml                                | TOML     |          3 |          0 |          0 |          3 |
+| /home/sysadmin/Sources/pyocat/pyocat/__init__.py                         | Python   |          9 |          0 |          3 |         12 |
+| /home/sysadmin/Sources/pyocat/pyocat/_http.py                            | Python   |         19 |          2 |          4 |         25 |
+| /home/sysadmin/Sources/pyocat/pyocat/api_client.py                       | Python   |         56 |          3 |         34 |         93 |
+| /home/sysadmin/Sources/pyocat/pyocat/async_api_client.py                 | Python   |         56 |          3 |         34 |         93 |
+| /home/sysadmin/Sources/pyocat/pyocat/async_auth.py                       | Python   |         27 |         30 |          8 |         65 |
+| /home/sysadmin/Sources/pyocat/pyocat/async_client.py                     | Python   |         44 |        118 |         36 |        198 |
+| /home/sysadmin/Sources/pyocat/pyocat/auth.py                             | Python   |         27 |         30 |          9 |         66 |
+| /home/sysadmin/Sources/pyocat/pyocat/client.py                           | Python   |         44 |        118 |         36 |        198 |
+| /home/sysadmin/Sources/pyocat/pyocat/exceptions.py                       | Python   |          3 |          3 |          3 |          9 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/__init__.py                  | Python   |         12 |          0 |          1 |         13 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/device_response.py           | Python   |         25 |         40 |          6 |         71 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/event_response.py            | Python   |         14 |         16 |          7 |         37 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/measurement_response.py      | Python   |         15 |         20 |          6 |         41 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/message_response.py          | Python   |         16 |         11 |          7 |         34 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/mode_response.py             | Python   |         53 |         19 |         14 |         86 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/state_response.py            | Python   |         66 |         22 |         19 |        107 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/statistics_response.py       | Python   |         17 |         18 |         10 |         45 |
+| /home/sysadmin/Sources/pyocat/pyocat/models/water_protection_response.py | Python   |         16 |         10 |          7 |         33 |
+| /home/sysadmin/Sources/pyocat/pyproject.toml                             | TOML     |         30 |          0 |          5 |         35 |
+| /home/sysadmin/Sources/pyocat/tests/__init__.py                          | Python   |          0 |          0 |          1 |          1 |
+| /home/sysadmin/Sources/pyocat/tests/test_api_client.py                   | Python   |        283 |          0 |         37 |        320 |
+| /home/sysadmin/Sources/pyocat/tests/test_async_api_client.py             | Python   |        301 |          0 |         36 |        337 |
+| /home/sysadmin/Sources/pyocat/tests/test_models.py                       | Python   |        298 |          0 |         32 |        330 |
+| Total                                                                    |          |      2,053 |        480 |        461 |      2,994 |
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-from httpx2 import AsyncClient, Response
+from httpx2 import AsyncClient, RequestError, Response
 
 from ._http import raise_for_status
 
@@ -53,12 +53,15 @@ class AsyncAuth:
         -------
         An `httpx2.Response`.
         """
-        headers = dict[str, str]()
-        headers['X-API-KEY'] = self.api_key
-        response = await self.client.get(
-            url=f'{self.host}/{path}',
-            params=params,
-            headers=headers
-        )
-        raise_for_status(response)
-        return response
+        try:
+            headers = dict[str, str]()
+            headers['X-API-KEY'] = self.api_key
+            response = await self.client.get(
+                url=f'{self.host}/{path}',
+                params=params,
+                headers=headers
+            )
+            raise_for_status(response)
+            return response
+        except RequestError as err:
+            

@@ -1,9 +1,17 @@
+class WTCApiError(Exception):
+    """WATERCryst base exception"""
 
-class WTCApiUnauthorizedError(Exception):
-    """Exception raised for unauthorized access"""
-
-class WTCApiDisabledError(Exception):
+class WTCApiDisabledError(WTCApiError):
     """Exception raised when accessing the disabled API"""
 
-class WTCApiTemporaryError(Exception):
-    """Exception raised when a temporary api failure occurs"""
+class WTCApiQuotaExceededError(WTCApiError):
+    """Exception raised when the request quota has been exceeded"""
+
+class WTCApiRequestError(WTCApiError):
+    """Exception raised when a client-side error occurs"""
+
+class WTCApiServerError(WTCApiError):
+    """Exception raised when a server-side API failure occurs"""
+
+class WTCApiUnauthorizedError(WTCApiError):
+    """Exception raised for unauthorized access"""
