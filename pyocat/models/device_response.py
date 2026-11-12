@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 
 
 class DeviceResponse(BaseModel):
@@ -68,3 +68,9 @@ class DeviceResponse(BaseModel):
     latest_firmware_version:       Annotated[str | None, Field(alias='latestFirmwareVersion')]      = None
     system_mac_address:            Annotated[str | None, Field(alias='systemMacAddress')]           = None
     ble_mac_address:               Annotated[str | None, Field(alias='bleMacAddress')]              = None
+
+    @property
+    @computed_field
+    def model(self) -> str:
+        """The full model name."""
+        return " ".join(p for p in (self.line, self.series) if p)
