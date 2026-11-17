@@ -13,5 +13,8 @@ class WTCApiRequestError(WTCApiError):
 class WTCApiServerError(WTCApiError):
     """Exception raised when a server-side API failure occurs"""
 
+class WTCApiTimeoutError(WTCApiError):
+    """Exception raised when a request timeout occurs"""
+
 class WTCApiUnauthorizedError(WTCApiError):
     """Exception raised for unauthorized access"""

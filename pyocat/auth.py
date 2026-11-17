@@ -1,6 +1,8 @@
 from collections.abc import Mapping
 
-from httpx2 import Client, Response
+from httpx2 import Client, RequestError, Response
+
+from .exceptions import WTCApiRequestError, WTCApiTimeoutError
 
 from ._http import raise_for_status
 
@@ -53,13 +55,18 @@ class Auth:
         -------
         An `httpx2.Response`.
         """
-        headers = dict[str, str]()
-        headers['X-API-KEY'] = self.api_key
+        try:
+            headers = dict[str, str]()
+            headers['X-API-KEY'] = self.api_key
 
-        response = self.client.get(
-            url=f'{self.host}/{path}',
-            params=params,
-            headers=headers
-        )
-        raise_for_status(response)
-        return response
+            response = self.client.get(
+                url=f'{self.host}/{path}',
+                params=params,
+                headers=headers
+            )
+            raise_for_status(response)
+            return response
+        except RequestError as err:
+            raise WTCApiRequestError() from err
+        except TimeoutError as err:
+            raise WTCApiTimeoutError() from err
