@@ -327,3 +327,11 @@ def test_device_response_deserialize():
     }
     """
     assert DeviceResponse.model_validate_json(json) == res
+
+
+def test_device_response_model_property():
+    res = DeviceResponse(
+        line="BIOCAT",
+        series="KLS 3000-C",
+    )
+    assert res.model == "BIOCAT KLS 3000-C"

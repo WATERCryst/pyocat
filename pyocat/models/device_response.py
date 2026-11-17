@@ -70,7 +70,6 @@ class DeviceResponse(BaseModel):
     ble_mac_address:               Annotated[str | None, Field(alias='bleMacAddress')]              = None
 
     @property
-    @computed_field
     def model(self) -> str:
         """The full model name."""
         return " ".join(p for p in (self.line, self.series) if p)
