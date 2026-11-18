@@ -21,8 +21,15 @@ class StatisticsResponseEntry(BaseModel):
         validate_by_alias=True
     )
 
-    consumption: Annotated[float         | None, Field(alias='consumption')] = None
-    date:        Annotated[AwareDatetime | None, Field(alias='date')]        = None
+    consumption: Annotated[
+        float | None, 
+        Field(alias='consumption')
+    ] = None
+
+    date: Annotated[
+        AwareDatetime | None, 
+        Field(alias='date')
+    ] = None
 
 
 class StatisticsResponse(BaseModel):
@@ -41,4 +48,7 @@ class StatisticsResponse(BaseModel):
         validate_by_alias=True
     )
 
-    entries: Annotated[list[StatisticsResponseEntry], Field(alias='entries')] = []
+    entries: Annotated[
+        list[StatisticsResponseEntry], 
+        Field(alias='entries')
+    ] = []

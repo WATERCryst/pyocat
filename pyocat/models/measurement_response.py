@@ -31,10 +31,37 @@ class MeasurementResponse(BaseModel):
         validate_by_alias=True
     )
 
-    water_temp:              Annotated[int   | None, Field(alias='waterTemp')]            = None
-    pressure:                Annotated[float | None, Field(alias='pressure')]             = None
-    flow_rate:               Annotated[float | None, Field(alias='flowRate')]             = None
-    todays_consumption:      Annotated[float | None, Field(alias='todaysConsumption')]    = None
-    total_consumption:       Annotated[float | None, Field(alias='totalConsumption')]     = None
-    last_water_tap_volume:   Annotated[float | None, Field(alias='lastWaterTapVolume')]   = None
-    last_water_tap_duration: Annotated[int   | None, Field(alias='lastWaterTapDuration')] = None
+    water_temp: Annotated[
+        int | None, 
+        Field(alias='waterTemp')
+    ] = None
+
+    pressure: Annotated[
+        float | None, 
+        Field(alias='pressure')
+    ] = None
+
+    flow_rate: Annotated[
+        float | None, 
+        Field(alias='flowRate')
+    ] = None
+
+    todays_consumption: Annotated[
+        float | None, 
+        Field(alias='todaysConsumption')
+    ] = None
+
+    total_consumption: Annotated[
+        float | None, 
+        Field(alias='totalConsumption')
+    ] = None
+
+    last_water_tap_volume: Annotated[
+        float | None, 
+        Field(alias='lastWaterTapVolume')
+    ] = None
+
+    last_water_tap_duration: Annotated[
+        int | None, 
+        Field(alias='lastWaterTapDuration')
+    ] = None

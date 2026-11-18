@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class DeviceResponse(BaseModel):
@@ -51,23 +51,90 @@ class DeviceResponse(BaseModel):
         validate_by_alias=True
     )
 
-    biocat_serial:                 Annotated[str | None, Field(alias='biocatSerial')]               = None
-    electronics_serial:            Annotated[str | None, Field(alias='electronicsSerial')]          = None
-    device_type_number:            Annotated[str | None, Field(alias='deviceTypeNumber')]           = None
-    line:                          Annotated[str | None, Field(alias='line')]                       = None
-    series:                        Annotated[str | None, Field(alias='series')]                     = None
-    has_flow_rate_sensor:          Annotated[bool,       Field(alias='hasFlowRateSensor')]          = False
-    has_leakage_protection_system: Annotated[bool,       Field(alias='hasLeakageProtectionSystem')] = False
-    has_lime_scale_protection:     Annotated[bool,       Field(alias='hasLimeScaleProtection')]     = False
-    has_pressure_sensor:           Annotated[bool,       Field(alias='hasPressureSensor')]          = False
-    has_temperature_sensor:        Annotated[bool,       Field(alias='hasTemperatureSensor')]       = False
-    has_wireless_sensor_option:    Annotated[bool,       Field(alias='hasWirelessSensorOption')]    = False
-    name:                          Annotated[str | None, Field(alias='name')]                       = None
-    current_firmware_version:      Annotated[str | None, Field(alias='currentFirmwareVersion')]     = None
-    current_hardware_version:      Annotated[str | None, Field(alias='currentHardwareVersion')]     = None
-    latest_firmware_version:       Annotated[str | None, Field(alias='latestFirmwareVersion')]      = None
-    system_mac_address:            Annotated[str | None, Field(alias='systemMacAddress')]           = None
-    ble_mac_address:               Annotated[str | None, Field(alias='bleMacAddress')]              = None
+    biocat_serial: Annotated[
+        str | None, 
+        Field(alias='biocatSerial')
+    ] = None
+
+    electronics_serial: Annotated[
+        str | None, 
+        Field(alias='electronicsSerial')
+    ] = None
+
+    device_type_number: Annotated[
+        str | None, 
+        Field(alias='deviceTypeNumber')
+    ] = None
+
+    line: Annotated[
+        str | None, 
+        Field(alias='line')
+    ] = None
+
+    series: Annotated[
+        str | None, 
+        Field(alias='series')
+    ] = None
+
+    has_flow_rate_sensor: Annotated[
+        bool,
+        Field(alias='hasFlowRateSensor')
+    ] = False
+
+    has_leakage_protection_system: Annotated[
+        bool, 
+        Field(alias='hasLeakageProtectionSystem')
+    ] = False
+
+    has_lime_scale_protection: Annotated[
+        bool, 
+        Field(alias='hasLimeScaleProtection')
+    ] = False
+
+    has_pressure_sensor: Annotated[
+        bool, 
+        Field(alias='hasPressureSensor')
+    ] = False
+
+    has_temperature_sensor: Annotated[
+        bool, 
+        Field(alias='hasTemperatureSensor')
+    ] = False
+
+    has_wireless_sensor_option: Annotated[
+        bool, 
+        Field(alias='hasWirelessSensorOption')
+    ] = False
+
+    name: Annotated[
+        str | None, 
+        Field(alias='name')
+    ] = None
+
+    current_firmware_version: Annotated[
+        str | None, 
+        Field(alias='currentFirmwareVersion')
+    ] = None
+
+    current_hardware_version: Annotated[
+        str | None, 
+        Field(alias='currentHardwareVersion')
+    ] = None
+
+    latest_firmware_version: Annotated[
+        str | None, 
+        Field(alias='latestFirmwareVersion')
+    ] = None
+
+    system_mac_address: Annotated[
+        str | None, 
+        Field(alias='systemMacAddress')
+    ] = None
+
+    ble_mac_address: Annotated[
+        str | None, 
+        Field(alias='bleMacAddress')
+    ] = None
 
     def get_model_name(self) -> str:
         """The full model name."""

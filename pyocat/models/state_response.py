@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import StrEnum
 from typing import Annotated, Any, Dict
 
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, PlainSerializer
@@ -7,7 +7,7 @@ from .event_response import EventResponse
 from .mode_response import ModeResponse
 from .water_protection_response import WaterProtectionResponse
 
-class MlState(str, Enum):
+class MlState(StrEnum):
     CANCELLED = "cancelled"
     FAILURE_PRESSURE_DROP = "failure_pressure_drop"
     FAILURE_START_PRESSURE = "failure_start_pressure"

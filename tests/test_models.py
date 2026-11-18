@@ -2,6 +2,7 @@ from datetime import datetime, UTC
 
 from pyocat.models import (
     DeviceResponse,
+    EventCategory,
     EventResponse, 
     MeasurementResponse,
     MessageResponse,
@@ -18,7 +19,7 @@ from pyocat.models import (
 def test_event_response_serialization():
     res = EventResponse(
         event_id=0,
-        category="info",
+        category=EventCategory.INFO,
         title="Unknown Event",
         description="Unknown Event",
         timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),
@@ -30,7 +31,7 @@ def test_event_response_serialization():
 def test_event_response_deserialization():
     res = EventResponse(
         event_id=0,
-        category="info",
+        category=EventCategory.INFO,
         title="Unknown Event",
         description="Unknown Event",
         timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),
@@ -138,7 +139,7 @@ def test_state_response_serialize():
         ),
         event=EventResponse(
             event_id=0,
-            category="info",
+            category=EventCategory.INFO,
             title="Unknown Event",
             description="Unknown Event",
             timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),  
@@ -162,7 +163,7 @@ def test_state_response_deserialize():
         ),
         event=EventResponse(
             event_id=0,
-            category="info",
+            category=EventCategory.INFO,
             title="Unknown Event",
             description="Unknown Event",
             timestamp=datetime(2026, 6, 8, 13, 13, tzinfo=UTC),  

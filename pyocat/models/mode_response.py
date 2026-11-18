@@ -1,9 +1,9 @@
-from enum import Enum
+from enum import StrEnum
 from typing import Annotated, Any, Dict
 
 from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, PlainSerializer
 
-class ModeId(str, Enum):
+class ModeId(StrEnum):
     ERROR_MODE = "error_mode"
     FAIL_SAFE = "fail_safe"
     LEAKAGE_PROTECTION = "leakage_protection"
