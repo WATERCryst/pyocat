@@ -334,4 +334,4 @@ def test_device_response_model_property():
         line="BIOCAT",
         series="KLS 3000-C",
     )
-    assert res.model == "BIOCAT KLS 3000-C"
+    assert res.get_model_name() == "BIOCAT KLS 3000-C"
