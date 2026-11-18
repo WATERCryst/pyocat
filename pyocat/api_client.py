@@ -1,3 +1,9 @@
+from json import JSONDecodeError
+
+from pydantic import ValidationError
+
+from .exceptions import WTCApiValidationError
+
 from .auth import Auth
 from .client import Client, Formats, Locales
 from .models import (
@@ -45,8 +51,11 @@ class ApiClient(Client):
 
 
     def get_measurements(self):
-        response = self.auth.get('v1/measurements/direct')
-        return MeasurementResponse.model_validate(response.json())
+        try:
+            response = self.auth.get('v1/measurements/direct')
+            return MeasurementResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err
 
 
     def start_micro_leakage_measurement(self):
@@ -54,18 +63,27 @@ class ApiClient(Client):
 
 
     def get_daily_statistics(self):
-        response = self.auth.get('v1/statistics/daily/direct')
-        return StatisticsResponse.model_validate(response.json())
+        try:
+            response = self.auth.get('v1/statistics/daily/direct')
+            return StatisticsResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err
 
 
     def get_todays_consumption(self):
-        response = self.auth.get('v1/statistics/cumulative/daily')
-        return float(response.json())
+        try:
+            response = self.auth.get('v1/statistics/cumulative/daily')
+            return float(response.json())
+        except (JSONDecodeError, ValueError, TypeError) as err:
+            raise WTCApiValidationError() from err
 
 
     def get_total_consumption(self):
-        response = self.auth.get('v1/statistics/cumulative/total')
-        return float(response.json())
+        try:
+            response = self.auth.get('v1/statistics/cumulative/total')
+            return float(response.json())
+        except (JSONDecodeError, ValueError, TypeError) as err:
+            raise WTCApiValidationError() from err
 
 
     def open_water_supply(self):
@@ -80,13 +98,19 @@ class ApiClient(Client):
         locale: Locales = 'de',
         format: Formats = 'plain'    
     ):
-        response = self.auth.get(
-            path='v1/state', 
-            params={ 'locale': locale, 'format': format }
-        )
-        return StateResponse.model_validate(response.json())
+        try:
+            response = self.auth.get(
+                path='v1/state', 
+                params={ 'locale': locale, 'format': format }
+            )
+            return StateResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err
 
 
     def get_device_info(self):
-        response = self.auth.get('v1/device')
-        return DeviceResponse.model_validate(response.json())
+        try:
+            response = self.auth.get('v1/device')
+            return DeviceResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err

@@ -1,3 +1,9 @@
+from json import JSONDecodeError
+
+from pydantic import ValidationError
+
+from .exceptions import WTCApiValidationError
+
 from .async_auth import AsyncAuth
 from .async_client import AsyncClient, Formats, Locales
 from .models import (
@@ -45,8 +51,11 @@ class AsyncApiClient(AsyncClient):
 
 
     async def get_measurements(self):
-        response = await self.auth.get('v1/measurements/direct')
-        return MeasurementResponse.model_validate(response.json())
+        try:
+            response = await self.auth.get('v1/measurements/direct')
+            return MeasurementResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err
 
 
     async def start_micro_leakage_measurement(self):
@@ -54,18 +63,27 @@ class AsyncApiClient(AsyncClient):
 
 
     async def get_daily_statistics(self):
-        response = await self.auth.get('v1/statistics/daily/direct')
-        return StatisticsResponse.model_validate(response.json())
+        try:
+            response = await self.auth.get('v1/statistics/daily/direct')
+            return StatisticsResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err
 
 
     async def get_todays_consumption(self):
-        response = await self.auth.get('v1/statistics/cumulative/daily')
-        return float(response.json())
+        try:
+            response = await self.auth.get('v1/statistics/cumulative/daily')
+            return float(response.json())
+        except (JSONDecodeError, ValueError, TypeError) as err:
+            raise WTCApiValidationError() from err
 
 
     async def get_total_consumption(self):
-        response = await self.auth.get('v1/statistics/cumulative/total')
-        return float(response.json())
+        try:
+            response = await self.auth.get('v1/statistics/cumulative/total')
+            return float(response.json())
+        except (JSONDecodeError, ValueError, TypeError) as err:
+            raise WTCApiValidationError() from err
 
 
     async def open_water_supply(self):
@@ -80,13 +98,19 @@ class AsyncApiClient(AsyncClient):
         locale: Locales = 'de',
         format: Formats = 'plain'    
     ):
-        response = await self.auth.get(
-            path='v1/state', 
-            params={ 'locale': locale, 'format': format }
-        )
-        return StateResponse.model_validate(response.json())
+        try:
+            response = await self.auth.get(
+                path='v1/state', 
+                params={ 'locale': locale, 'format': format }
+            )
+            return StateResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err
 
 
     async def get_device_info(self):
-        response = await self.auth.get('v1/device')
-        return DeviceResponse.model_validate(response.json())
+        try:
+            response = await self.auth.get('v1/device')
+            return DeviceResponse.model_validate(response.json())
+        except (JSONDecodeError, ValidationError) as err:
+            raise WTCApiValidationError() from err

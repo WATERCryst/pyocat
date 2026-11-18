@@ -1,6 +1,9 @@
 class WTCApiError(Exception):
     """WATERCryst base exception"""
 
+class WTCApiCancelledError(WTCApiError):
+    """Exception raised when an async request is cancelled"""
+
 class WTCApiDisabledError(WTCApiError):
     """Exception raised when accessing the disabled API"""
 
@@ -18,3 +21,6 @@ class WTCApiTimeoutError(WTCApiError):
 
 class WTCApiUnauthorizedError(WTCApiError):
     """Exception raised for unauthorized access"""
+
+class WTCApiValidationError(WTCApiError):
+    """Exception raised when model validation failed"""

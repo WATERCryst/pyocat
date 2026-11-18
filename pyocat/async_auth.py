@@ -1,8 +1,9 @@
+from asyncio import CancelledError
 from collections.abc import Mapping
 
 from httpx2 import AsyncClient, RequestError, Response
 
-from .exceptions import WTCApiRequestError, WTCApiTimeoutError
+from .exceptions import WTCApiRequestError, WTCApiTimeoutError, WTCApiCancelledError
 
 from ._http import raise_for_status
 
@@ -69,3 +70,5 @@ class AsyncAuth:
             raise WTCApiRequestError() from err
         except TimeoutError as err:
             raise WTCApiTimeoutError() from err
+        except CancelledError as err:
+            raise WTCApiCancelledError() from err
